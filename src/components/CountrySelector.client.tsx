@@ -59,7 +59,7 @@ export function CountrySelector() {
           return (
             <>
               <Listbox.Button
-                className={`flex items-center justify-between w-full py-3 px-4 border ${
+                className={`flex w-full items-center justify-between border py-3 px-4 ${
                   open ? 'rounded-b md:rounded-t md:rounded-b-none' : 'rounded'
                 } border-contrast/30 dark:border-white`}
               >
@@ -68,9 +68,9 @@ export function CountrySelector() {
               </Listbox.Button>
 
               <Listbox.Options
-                className={`border-t-contrast/30 border-contrast/30 bg-primary dark:bg-contrast absolute bottom-12 z-10 grid
-                h-48 w-full overflow-y-scroll rounded-t border dark:border-white px-2 py-2
-                transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none
+                className={`absolute bottom-12 z-10 grid h-48 w-full overflow-y-scroll rounded-t
+                border border-contrast/30 border-t-contrast/30 bg-primary px-2 py-2 transition-[max-height] duration-150
+                dark:border-white dark:bg-contrast sm:bottom-auto md:rounded-b md:rounded-t-none
                 md:border-t-0 md:border-b ${
                   listBoxOpen ? 'max-h-48' : 'max-h-0'
                 }`}

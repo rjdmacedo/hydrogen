@@ -127,13 +127,13 @@ export function AccountDetailsEdit({
       </Text>
       <form noValidate onSubmit={onSubmit}>
         {submitError && (
-          <div className="flex items-center justify-center mb-6 bg-red-100 rounded">
+          <div className="mb-6 flex items-center justify-center rounded bg-red-100">
             <p className="m-4 text-sm text-red-900">{submitError}</p>
           </div>
         )}
         <div className="mt-3">
           <input
-            className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+            className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
             id="firstname"
             name="firstname"
             type="text"
@@ -148,7 +148,7 @@ export function AccountDetailsEdit({
         </div>
         <div className="mt-3">
           <input
-            className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+            className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
             id="lastname"
             name="lastname"
             type="text"
@@ -163,7 +163,7 @@ export function AccountDetailsEdit({
         </div>
         <div className="mt-3">
           <input
-            className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+            className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
             id="phone"
             name="phone"
             type="tel"
@@ -178,7 +178,7 @@ export function AccountDetailsEdit({
         </div>
         <div className="mt-3">
           <input
-            className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline rounded ${
+            className={`focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50 ${
               emailError ? ' border-red-500' : 'border-gray-500'
             }`}
             id="email"
@@ -194,7 +194,7 @@ export function AccountDetailsEdit({
             }}
           />
           <p
-            className={`text-red-500 text-xs ${!emailError ? 'invisible' : ''}`}
+            className={`text-xs text-red-500 ${!emailError ? 'invisible' : ''}`}
           >
             {emailError} &nbsp;
           </p>
@@ -237,7 +237,7 @@ export function AccountDetailsEdit({
         </Text>
         <div className="mt-6">
           <Button
-            className="text-sm mb-2"
+            className="mb-2 text-sm"
             variant="primary"
             width="full"
             type="submit"
@@ -276,7 +276,7 @@ function Password({
   return (
     <div className="mt-3">
       <input
-        className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline rounded ${
+        className={`focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50 ${
           passwordError ? ' border-red-500' : 'border-gray-500'
         }`}
         id={name}

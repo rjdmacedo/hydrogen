@@ -18,7 +18,7 @@ export function ProductGallery({
 
   return (
     <div
-      className={`swimlane md:grid-flow-row hiddenScroll md:p-0 md:overflow-x-auto md:grid-cols-2 ${className}`}
+      className={`swimlane hiddenScroll md:grid-flow-row md:grid-cols-2 md:overflow-x-auto md:p-0 ${className}`}
     >
       {media.map((med, i) => {
         let mediaProps: Record<string, any> = {};
@@ -84,7 +84,7 @@ export function ProductGallery({
           >
             <MediaFile
               tabIndex="0"
-              className={`w-full h-full aspect-square fadeIn object-cover`}
+              className={`fadeIn aspect-square h-full w-full object-cover`}
               data={data}
               sizes={
                 isFullWidth

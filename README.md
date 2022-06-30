@@ -1,5 +1,7 @@
 # Hydrogen Demo Store
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/71a07667-ceb4-405b-b61a-c02a35a30ce4/deploy-status)](https://app.netlify.com/sites/wine-and-vine/deploys)
+
 Hydrogen is a React framework and SDK that you can use to build fast and dynamic Shopify custom storefronts.
 
 [Check out the docs](https://shopify.dev/custom-storefronts/hydrogen)

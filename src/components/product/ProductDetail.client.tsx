@@ -26,17 +26,17 @@ export function ProductDetail({
               <IconClose
                 className={`${
                   open ? '' : 'rotate-[45deg]'
-                } transition-transform transform-gpu duration-200`}
+                } transform-gpu transition-transform duration-200`}
               />
             </div>
           </Disclosure.Button>
 
-          <Disclosure.Panel className={'pb-4 pt-2 grid gap-2'}>
+          <Disclosure.Panel className={'grid gap-2 pb-4 pt-2'}>
             <Text as="div">{content}</Text>
             {learnMore && (
               <div className="">
                 <Link
-                  className="pb-px border-b border-primary/30 text-primary/50"
+                  className="border-b border-primary/30 pb-px text-primary/50"
                   to={learnMore}
                 >
                   Learn more

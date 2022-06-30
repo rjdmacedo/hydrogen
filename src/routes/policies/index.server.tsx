@@ -60,7 +60,7 @@ export default function Policies() {
             return;
           }
           return (
-            <Heading className="font-normal text-heading" key={policy.id}>
+            <Heading className="text-heading font-normal" key={policy.id}>
               <Link to={`/policies/${policy.handle}`}>{policy.title}</Link>
             </Heading>
           );

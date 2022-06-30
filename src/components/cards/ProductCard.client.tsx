@@ -59,13 +59,13 @@ export function ProductCard({
           <Text
             as="label"
             size="fine"
-            className="z-10 absolute top-0 right-0 m-4 text-right text-notice"
+            className="absolute top-0 right-0 z-10 m-4 text-right text-notice"
           >
             {cardLabel}
           </Text>
           {image && (
             <Image
-              className="aspect-[4/5] w-full object-cover fadeIn"
+              className="fadeIn aspect-[4/5] w-full object-cover"
               widths={[320]}
               sizes="320px"
               loaderOptions={{
@@ -83,7 +83,7 @@ export function ProductCard({
         </div>
         <div className="grid gap-1">
           <Text
-            className="w-full overflow-hidden whitespace-nowrap text-ellipsis "
+            className="w-full overflow-hidden text-ellipsis whitespace-nowrap "
             as="h3"
           >
             {product.title}

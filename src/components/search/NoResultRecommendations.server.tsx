@@ -1,10 +1,27 @@
-import {gql, useShopQuery} from '@shopify/hydrogen';
-
-import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
-import {FeaturedCollections} from '~/components';
-import {ProductSwimlane} from '~/components/index.server';
-import {PAGINATION_SIZE} from '~/lib/const';
 import {Suspense} from 'react';
+import {PAGINATION_SIZE} from '~/lib/const';
+import {FeaturedCollections} from '~/components';
+import {gql, useShopQuery} from '@shopify/hydrogen';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
+import {ProductSwimlane} from '~/components/index.server';
+import type {Collection, Product} from '@shopify/hydrogen/storefront-api-types';
+
+type SearchNoResultsQueryResponse = {
+  featuredProducts: {
+    nodes: Pick<
+      Product,
+      | 'id'
+      | 'title'
+      | 'handle'
+      | 'publishedAt'
+      | 'availableForSale'
+      | 'variants'
+    >[];
+  };
+  featuredCollections: {
+    nodes: Pick<Collection, 'id' | 'title' | 'handle' | 'image'>[];
+  };
+};
 
 export function NoResultRecommendations({
   country,
@@ -13,7 +30,7 @@ export function NoResultRecommendations({
   country: string;
   language: string;
 }) {
-  const {data} = useShopQuery<any>({
+  const {data} = useShopQuery<SearchNoResultsQueryResponse>({
     query: SEARCH_NO_RESULTS_QUERY,
     variables: {
       country,
@@ -27,11 +44,11 @@ export function NoResultRecommendations({
     <Suspense>
       <FeaturedCollections
         title="Trending Collections"
-        data={data.featuredCollections.nodes}
+        data={data.featuredCollections.nodes as Collection[]}
       />
       <ProductSwimlane
         title="Trending Products"
-        data={data.featuredProducts.nodes}
+        data={data.featuredProducts.nodes as Product[]}
       />
     </Suspense>
   );

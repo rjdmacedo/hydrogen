@@ -7,7 +7,6 @@ import {
   AddToCartButton,
   Money,
   OptionWithValues,
-  ShopPayButton,
 } from '@shopify/hydrogen';
 
 import {Heading, Text, Button, ProductOptions} from '~/components';
@@ -83,7 +82,7 @@ export function ProductForm() {
             return (
               <div
                 key={name}
-                className="flex flex-col flex-wrap mb-4 gap-y-2 last:mb-0"
+                className="mb-4 flex flex-col flex-wrap gap-y-2 last:mb-0"
               >
                 <Heading as="legend" size="lead" className="min-w-[4rem]">
                   {name}
@@ -129,7 +128,7 @@ export function ProductForm() {
                   <Money
                     as="span"
                     withoutTrailingZeros
-                    className="opacity-50 strike"
+                    className="strike opacity-50"
                     data={selectedVariant.compareAtPriceV2!}
                   />
                 )}

@@ -80,15 +80,15 @@ export function AccountActivateForm({
       <div className="w-full max-w-md">
         <h1 className="text-4xl">Activate Account.</h1>
         <p className="mt-4">Create your password to activate your account.</p>
-        <form noValidate className="pt-6 pb-8 mt-4 mb-4" onSubmit={onSubmit}>
+        <form noValidate className="mt-4 mb-4 pt-6 pb-8" onSubmit={onSubmit}>
           {submitError && (
-            <div className="flex items-center justify-center mb-6 bg-primary/30">
-              <p className="m-4 text-s text-contrast">{submitError}</p>
+            <div className="mb-6 flex items-center justify-center bg-primary/30">
+              <p className="text-s m-4 text-contrast">{submitError}</p>
             </div>
           )}
           <div className="mb-4">
             <input
-              className={`mb-1 appearance-none border w-full py-2 px-3 text-primary placeholder:text-primary/30 leading-tight focus:shadow-outline ${
+              className={`focus:shadow-outline mb-1 w-full appearance-none border py-2 px-3 leading-tight text-primary placeholder:text-primary/30 ${
                 passwordError ? ' border-notice' : 'border-primary'
               }`}
               id="password"
@@ -105,7 +105,7 @@ export function AccountActivateForm({
               }}
             />
             <p
-              className={`text-red-500 text-xs ${
+              className={`text-xs text-red-500 ${
                 !passwordError ? 'invisible' : ''
               }`}
             >
@@ -114,7 +114,7 @@ export function AccountActivateForm({
           </div>
           <div className="mb-4">
             <input
-              className={`mb-1 appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline ${
+              className={`focus:shadow-outline mb-1 w-full appearance-none border py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50 ${
                 passwordConfirmError ? ' border-red-500' : 'border-gray-900'
               }`}
               id="passwordConfirm"
@@ -131,7 +131,7 @@ export function AccountActivateForm({
               }}
             />
             <p
-              className={`text-red-500 text-xs ${
+              className={`text-xs text-red-500 ${
                 !passwordConfirmError ? 'invisible' : ''
               }`}
             >
@@ -140,7 +140,7 @@ export function AccountActivateForm({
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="block w-full px-4 py-2 text-contrast uppercase bg-gray-900 focus:shadow-outline"
+              className="focus:shadow-outline block w-full bg-gray-900 px-4 py-2 uppercase text-contrast"
               type="submit"
             >
               Save

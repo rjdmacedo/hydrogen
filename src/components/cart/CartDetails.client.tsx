@@ -1,12 +1,6 @@
 import {useRef} from 'react';
 import {useScroll} from 'react-use';
-import {
-  useCart,
-  CartLineProvider,
-  CartShopPayButton,
-  Money,
-} from '@shopify/hydrogen';
-
+import {Money, useCart, CartLineProvider} from '@shopify/hydrogen';
 import {Button, Text, CartLineItem, CartEmpty} from '~/components';
 
 export function CartDetails({
@@ -75,7 +69,6 @@ function CartCheckoutActions() {
         <Button to={checkoutUrl} width="full">
           Continue to Checkout
         </Button>
-        <CartShopPayButton />
       </div>
     </>
   );

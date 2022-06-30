@@ -55,7 +55,7 @@ export default function Collection({params}: HydrogenRouteProps) {
       </Suspense>
       <PageHeader heading={collection.title}>
         {collection?.description && (
-          <div className="flex items-baseline justify-between w-full">
+          <div className="flex w-full items-baseline justify-between">
             <div>
               <Text format width="narrow" as="p" className="inline-block">
                 {collection.description}

@@ -95,7 +95,7 @@ export function ProductGrid({
 
       {nextPage && (
         <div
-          className="flex items-center justify-center mt-6"
+          className="mt-6 flex items-center justify-center"
           ref={nextButtonRef}
         >
           <Button

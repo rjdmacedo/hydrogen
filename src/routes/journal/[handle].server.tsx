@@ -66,7 +66,7 @@ export default function Post({params, response}: HydrogenRouteProps) {
         {data.blog.articleByHandle.image && (
           <Image
             data={data.blog.articleByHandle.image}
-            className="w-full mx-auto mt-8 md:mt-16 max-w-7xl"
+            className="mx-auto mt-8 w-full max-w-7xl md:mt-16"
             sizes="90vw"
             widths={[400, 800, 1200]}
             width="100px"

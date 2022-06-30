@@ -12,7 +12,7 @@ export function CollectionCard({
 }) {
   return (
     <Link to={`/collections/${collection.handle}`} className="grid gap-4">
-      <div className="card-image bg-primary/5 aspect-[3/2]">
+      <div className="card-image aspect-[3/2] bg-primary/5">
         {collection?.image && (
           <Image
             alt={`Image of ${collection.title}`}

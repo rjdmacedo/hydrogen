@@ -1,16 +1,15 @@
-import {EnhancedMenu} from '~/lib/utils';
-import {Text} from '~/components';
-import {Drawer} from './Drawer.client';
 import {Link} from '@shopify/hydrogen';
+import {Text, Drawer} from '~/components';
+import type {EnhancedMenu} from '~/lib/utils';
 
 export function MenuDrawer({
+  menu,
   isOpen,
   onClose,
-  menu,
 }: {
+  menu: EnhancedMenu;
   isOpen: boolean;
   onClose: () => void;
-  menu: EnhancedMenu;
 }) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">

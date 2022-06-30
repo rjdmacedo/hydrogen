@@ -70,13 +70,13 @@ export function AccountAddressEdit({
       <div className="max-w-lg">
         <form noValidate onSubmit={onSubmit}>
           {submitError && (
-            <div className="flex items-center justify-center mb-6 bg-red-100 rounded">
+            <div className="mb-6 flex items-center justify-center rounded bg-red-100">
               <p className="m-4 text-sm text-red-900">{submitError}</p>
             </div>
           )}
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="firstname"
               name="firstname"
               required
@@ -92,7 +92,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="lastname"
               name="lastname"
               required
@@ -108,7 +108,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="company"
               name="company"
               type="text"
@@ -123,7 +123,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="street1"
               name="street1"
               type="text"
@@ -139,7 +139,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="address2"
               name="address2"
               type="text"
@@ -154,7 +154,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="city"
               name="city"
               type="text"
@@ -170,7 +170,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="state"
               name="state"
               type="text"
@@ -186,7 +186,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="zip"
               name="zip"
               type="text"
@@ -202,7 +202,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="country"
               name="country"
               type="text"
@@ -218,7 +218,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-3">
             <input
-              className={`appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline border-gray-500 rounded`}
+              className={`focus:shadow-outline w-full appearance-none rounded border border-gray-500 py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50`}
               id="phone"
               name="phone"
               type="tel"
@@ -238,11 +238,11 @@ export function AccountAddressEdit({
               name="defaultAddress"
               id="defaultAddress"
               checked={isDefaultAddress}
-              className="border-gray-500 rounded-sm cursor-pointer border-1"
+              className="border-1 cursor-pointer rounded-sm border-gray-500"
               onChange={() => setIsDefaultAddress(!isDefaultAddress)}
             />
             <label
-              className="inline-block ml-2 text-sm cursor-pointer"
+              className="ml-2 inline-block cursor-pointer text-sm"
               htmlFor="defaultAddress"
             >
               Set as default address
@@ -250,7 +250,7 @@ export function AccountAddressEdit({
           </div>
           <div className="mt-8">
             <Button
-              className="w-full rounded focus:shadow-outline"
+              className="focus:shadow-outline w-full rounded"
               type="submit"
               variant="primary"
               disabled={saving}
@@ -260,7 +260,7 @@ export function AccountAddressEdit({
           </div>
           <div>
             <Button
-              className="w-full mt-2 rounded focus:shadow-outline"
+              className="focus:shadow-outline mt-2 w-full rounded"
               variant="secondary"
               onClick={close}
             >

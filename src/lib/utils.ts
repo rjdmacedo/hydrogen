@@ -3,6 +3,7 @@ import {useServerProps} from '@shopify/hydrogen';
 import {
   Menu,
   MenuItem,
+  MenuItemType,
   MoneyV2,
   UserError,
 } from '@shopify/hydrogen/storefront-api-types';
@@ -56,10 +57,7 @@ export function isNewArrival(date: string, daysOld = 30) {
 }
 
 export function isDiscounted(price: MoneyV2, compareAtPrice: MoneyV2) {
-  if (compareAtPrice?.amount > price?.amount) {
-    return true;
-  }
-  return false;
+  return compareAtPrice?.amount > price?.amount;
 }
 
 export function getExcerpt(text: string) {
@@ -70,13 +68,13 @@ export function getExcerpt(text: string) {
 
 function resolveToFromType(
   {
-    customPrefixes,
-    pathname,
     type,
+    pathname,
+    customPrefixes,
   }: {
-    customPrefixes: Record<string, string>;
+    type?: MenuItemType;
     pathname?: string;
-    type?: string;
+    customPrefixes: Record<string, string>;
   } = {
     customPrefixes: {},
   },
@@ -109,23 +107,23 @@ function resolveToFromType(
 
   switch (true) {
     // special cases
-    case type === 'FRONTPAGE':
+    case type === MenuItemType.Frontpage:
       return '/';
 
-    case type === 'ARTICLE': {
+    case type === MenuItemType.Article: {
       const blogHandle = pathParts.pop();
       return routePrefix.BLOG
         ? `/${routePrefix.BLOG}/${blogHandle}/${handle}/`
         : `/${blogHandle}/${handle}/`;
     }
 
-    case type === 'COLLECTIONS':
+    case type === MenuItemType.Collections:
       return `/${routePrefix.COLLECTIONS}`;
 
-    case type === 'SEARCH':
+    case type === MenuItemType.Search:
       return `/${routePrefix.SEARCH}`;
 
-    case type === 'CATALOG':
+    case type === MenuItemType.Catalog:
       return `/${routePrefix.CATALOG}`;
 
     // common cases: BLOG, PAGE, COLLECTION, PRODUCT, SHOP_POLICY, HTTP
@@ -192,7 +190,7 @@ export interface EnhancedMenu extends Menu {
 }
 
 /*
-  Recursively adds `to` and `target` attributes to links based on their url
+  Recursively adds `to` and `target` attributes to link based on their url
   and resource type.
   It optionally overwrites url paths based on item.type
 */

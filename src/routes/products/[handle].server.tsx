@@ -62,19 +62,19 @@ export default function Product() {
       </Suspense>
       <ProductOptionsProvider data={product}>
         <Section padding="x" className="px-0">
-          <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid items-start md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-20">
             <ProductGallery
               media={media.nodes}
               className="w-screen md:w-full lg:col-span-2"
             />
-            <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-              <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
+            <div className="hiddenScroll sticky md:top-nav md:-mb-nav md:h-screen md:-translate-y-nav md:overflow-y-scroll md:pt-nav">
+              <section className="flex w-full max-w-xl flex-col gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
                 <div className="grid gap-2">
                   <Heading as="h1" format className="whitespace-normal">
                     {title}
                   </Heading>
                   {vendor && (
-                    <Text className={'opacity-50 font-medium'}>{vendor}</Text>
+                    <Text className={'font-medium opacity-50'}>{vendor}</Text>
                   )}
                 </div>
                 <ProductForm />

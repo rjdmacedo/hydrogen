@@ -35,7 +35,7 @@ export function FooterMenu({menu}: {menu?: EnhancedMenu}) {
                 {item?.items?.length > 0 && (
                   <div
                     className={`${
-                      open ? `max-h-48 h-fit` : `max-h-0 md:max-h-fit`
+                      open ? `h-fit max-h-48` : `max-h-0 md:max-h-fit`
                     } overflow-hidden transition-all duration-300`}
                   >
                     <Disclosure.Panel static>

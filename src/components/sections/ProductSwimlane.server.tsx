@@ -1,7 +1,7 @@
 import {useMemo} from 'react';
-import {gql, useShopQuery, useLocalization} from '@shopify/hydrogen';
-import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
 import {ProductCard, Section} from '~/components';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
+import {gql, useShopQuery, useLocalization} from '@shopify/hydrogen';
 import type {
   Product,
   ProductConnection,
@@ -10,10 +10,15 @@ import type {
 const mockProducts = new Array(12).fill('');
 
 export function ProductSwimlane({
-  title = 'Featured Products',
   data = mockProducts,
+  title = 'Featured Products',
   count = 12,
   ...props
+}: {
+  data?: Product[] | string | undefined;
+  title?: string;
+  count?: number;
+  [key: string]: any;
 }) {
   const productCardsMarkup = useMemo(() => {
     // If the data is already provided, there's no need to query it, so we'll just return the data
@@ -22,7 +27,7 @@ export function ProductSwimlane({
     }
 
     // If the data provided is a productId, we will query the productRecommendations API.
-    // To make sure we have enough products for the swimlane, we'll combine the results with our top selling products.
+    // To make sure we have enough products for the swimlane, we'll combine the results with our top-selling products.
     if (typeof data === 'string') {
       return <RecommendedProducts productId={data} count={count} />;
     }
@@ -33,7 +38,7 @@ export function ProductSwimlane({
 
   return (
     <Section heading={title} padding="y" {...props}>
-      <div className="swimlane hiddenScroll md:pb-8 md:scroll-px-8 lg:scroll-px-12 md:px-8 lg:px-12">
+      <div className="swimlane hiddenScroll md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
         {productCardsMarkup}
       </div>
     </Section>
@@ -45,9 +50,9 @@ function ProductCards({products}: {products: Product[]}) {
     <>
       {products.map((product) => (
         <ProductCard
-          product={product}
           key={product.id}
-          className={'snap-start w-80'}
+          product={product}
+          className={'w-80 snap-start'}
         />
       ))}
     </>
@@ -55,15 +60,15 @@ function ProductCards({products}: {products: Product[]}) {
 }
 
 function RecommendedProducts({
-  productId,
   count,
+  productId,
 }: {
-  productId: string;
   count: number;
+  productId: string;
 }) {
   const {
-    language: {isoCode: languageCode},
     country: {isoCode: countryCode},
+    language: {isoCode: languageCode},
   } = useLocalization();
 
   const {data: products} = useShopQuery<{
@@ -82,12 +87,12 @@ function RecommendedProducts({
   const mergedProducts = products.recommended
     .concat(products.additional.nodes)
     .filter(
-      (value, index, array) =>
-        array.findIndex((value2) => value2.id === value.id) === index,
+      (product, index, array) =>
+        array.findIndex((p) => p.id === product.id) === index,
     );
 
   const originalProduct = mergedProducts
-    .map((item) => item.id)
+    .map((product) => product.id)
     .indexOf(productId);
 
   mergedProducts.splice(originalProduct, 1);
@@ -111,8 +116,8 @@ function TopProducts({count}: {count: number}) {
 const RECOMMENDED_PRODUCTS_QUERY = gql`
   ${PRODUCT_CARD_FRAGMENT}
   query productRecommendations(
-    $productId: ID!
     $count: Int
+    $productId: ID!
     $countryCode: CountryCode
     $languageCode: LanguageCode
   ) @inContext(country: $countryCode, language: $languageCode) {

@@ -1,10 +1,10 @@
 import {
-  useLocalization,
-  useShopQuery,
+  gql,
   Seo,
+  useShopQuery,
+  useLocalization,
   useServerAnalytics,
   ShopifyAnalyticsConstants,
-  gql,
   type HydrogenRouteProps,
 } from '@shopify/hydrogen';
 import {Suspense} from 'react';
@@ -31,8 +31,8 @@ export default function Page({params}: HydrogenRouteProps) {
 
   useServerAnalytics({
     shopify: {
-      pageType: ShopifyAnalyticsConstants.pageType.page,
       resourceId: page.id,
+      pageType: ShopifyAnalyticsConstants.pageType.page,
     },
   });
 

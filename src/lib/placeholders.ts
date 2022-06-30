@@ -1,6 +1,6 @@
 // Demo store placeholders
 const PLACEHOLDERS = {
-  HEROS: [
+  HEROES: [
     // primaryHero
     {
       heading: {value: 'All Mountain All Season'},
@@ -172,22 +172,22 @@ const PLACEHOLDERS = {
   },
 };
 
-// Return placeholders for collection Heros when metafields are not set
-export function getHeroPlaceholder(heros: any[]) {
-  if (!heros?.length) return [];
+// Return placeholders for collection Heroes when metafields are not set
+export function getHeroPlaceholder(heroes: any[]) {
+  if (!heroes?.length) return [];
 
   // when we pass a collection without metafields,
   // we merge it with placeholder data
-  return heros.map((hero, index) => {
+  return heroes.map((hero, index) => {
     // assume passed hero has metafields data already
     if (hero?.heading?.value) {
       return hero;
     }
 
     // hero placeholder
-    const placeholder = PLACEHOLDERS.HEROS[index];
+    const placeholder = PLACEHOLDERS.HEROES[index];
 
-    // prioritize metafield data if available, else the hero hero values
+    // prioritize metafield data if available, else the hero values
     // otherwise the placeholder values
     const byLine =
       hero?.byLine || hero?.descriptionHtml
@@ -218,6 +218,7 @@ export function getProductInfoPlaceholder() {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, infos);
   }
+
   return getMultipleRandom(PLACEHOLDERS.PRODUCT_INFO, 3);
 }
 

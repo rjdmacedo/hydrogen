@@ -12,14 +12,14 @@ export function FeaturedCollections({
   title?: string;
   [key: string]: any;
 }) {
-  const items = data.filter((item) => item.image).length;
   const haveCollections = data.length > 0;
+  const quantityOfProductsWithImages = data.filter((item) => item.image).length;
 
   if (!haveCollections) return null;
 
   return (
     <Section {...props} heading={title}>
-      <Grid items={items}>
+      <Grid items={quantityOfProductsWithImages}>
         {data.map((collection) => {
           if (!collection?.image) {
             return null;
@@ -28,19 +28,16 @@ export function FeaturedCollections({
           return (
             <Link key={collection.id} to={`/collections/${collection.handle}`}>
               <div className="grid gap-4">
-                <div className="card-image bg-primary/5 aspect-[3/2]">
+                <div className="card-image aspect-[3/2] bg-primary/5">
                   {collection?.image && (
                     <Image
-                      alt={`Image of ${collection.title}`}
-                      data={collection.image}
-                      height={400}
-                      sizes="(max-width: 32em) 100vw, 33vw"
                       width={600}
+                      height={400}
+                      data={collection.image}
+                      alt={`Image of ${collection.title}`}
+                      sizes="(max-width: 32em) 100vw, 33vw"
                       widths={[400, 500, 600, 700, 800, 900]}
-                      loaderOptions={{
-                        scale: 2,
-                        crop: 'center',
-                      }}
+                      loaderOptions={{scale: 2, crop: 'center'}}
                     />
                   )}
                 </div>

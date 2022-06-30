@@ -53,7 +53,7 @@ export function AccountAddressBook({
         </Modal>
       ) : null}
       <div className="grid w-full gap-4 p-4 py-6 md:gap-8 md:p-8 lg:p-12">
-        <h3 className="font-bold text-lead">Address Book</h3>
+        <h3 className="text-lead font-bold">Address Book</h3>
         <div>
           {!addresses?.length ? (
             <Text className="mb-1" width="narrow" as="p" size="copy">
@@ -62,7 +62,7 @@ export function AccountAddressBook({
           ) : null}
           <div className="w-48">
             <Button
-              className="mt-2 text-sm w-full mb-6"
+              className="mt-2 mb-6 w-full text-sm"
               onClick={() => {
                 editAddress({
                   /** empty address */
@@ -74,7 +74,7 @@ export function AccountAddressBook({
             </Button>
           </div>
           {addresses?.length ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
               {fullDefaultAddress ? (
                 <Address
                   address={fullDefaultAddress}
@@ -117,10 +117,10 @@ function Address({
   setDeletingAddress: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <div className="lg:p-8 p-6 border border-gray-200 rounded flex flex-col">
+    <div className="flex flex-col rounded border border-gray-200 p-6 lg:p-8">
       {defaultAddress ? (
         <div className="mb-3 flex flex-row">
-          <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary/50">
+          <span className="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary/50">
             Default
           </span>
         </div>
@@ -140,18 +140,18 @@ function Address({
         )}
       </ul>
 
-      <div className="flex flex-row font-medium mt-6">
+      <div className="mt-6 flex flex-row font-medium">
         <button
           onClick={() => {
             editAddress(address);
           }}
-          className="text-left underline text-sm"
+          className="text-left text-sm underline"
         >
           Edit
         </button>
         <button
           onClick={setDeletingAddress}
-          className="text-left text-primary/50 ml-6 text-sm"
+          className="ml-6 text-left text-sm text-primary/50"
         >
           Remove
         </button>

@@ -13,9 +13,9 @@ export function OrderCard({order}: {order: Order}) {
   const lineItems = flattenConnection<OrderLineItem>(order?.lineItems);
 
   return (
-    <li className="grid text-center border rounded">
+    <li className="grid rounded border text-center">
       <Link
-        className="grid items-center gap-4 p-4 md:gap-6 md:p-6 md:grid-cols-2"
+        className="grid items-center gap-4 p-4 md:grid-cols-2 md:gap-6 md:p-6"
         to={`/account/orders/${legacyOrderId}`}
       >
         {lineItems[0].variant?.image && (
@@ -24,7 +24,7 @@ export function OrderCard({order}: {order: Order}) {
               width={168}
               height={168}
               widths={[168]}
-              className="w-full fadeIn cover"
+              className="fadeIn cover w-full"
               alt={lineItems[0].variant?.image?.altText ?? 'Order image'}
               // @ts-expect-error Stock line item variant image type has `url` as optional
               data={lineItems[0].variant?.image}
@@ -42,7 +42,7 @@ export function OrderCard({order}: {order: Order}) {
               ? `${lineItems[0].title} +${lineItems.length - 1} more`
               : lineItems[0].title}
           </Heading>
-          <dl className="grid grid-gap-1">
+          <dl className="grid-gap-1 grid">
             <dt className="sr-only">Order ID</dt>
             <dd>
               <Text size="fine" color="subtle">
@@ -58,7 +58,7 @@ export function OrderCard({order}: {order: Order}) {
             <dt className="sr-only">Fulfillment Status</dt>
             <dd className="mt-2">
               <span
-                className={`px-3 py-1 text-xs font-medium rounded-full ${
+                className={`rounded-full px-3 py-1 text-xs font-medium ${
                   order.fulfillmentStatus === 'FULFILLED'
                     ? 'bg-green-100 text-green-800'
                     : 'bg-primary/5 text-primary/50'

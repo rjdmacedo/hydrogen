@@ -1,20 +1,19 @@
-import {Link, useUrl, useCart} from '@shopify/hydrogen';
 import {useWindowScroll} from 'react-use';
+import {Link, useUrl, useCart} from '@shopify/hydrogen';
+
+import type {EnhancedMenu} from '~/lib/utils';
 
 import {
   Input,
   Heading,
   IconBag,
   IconMenu,
+  useDrawer,
   IconSearch,
   IconAccount,
 } from '~/components';
-
-import {useDrawer} from '~/components';
 import {CartDrawer} from './CartDrawer.client';
 import {MenuDrawer} from './MenuDrawer.client';
-
-import type {EnhancedMenu} from '~/lib/utils';
 
 /**
  * A client component that specifies the content of the header on the website
@@ -80,8 +79,8 @@ function MobileHeader({
     button: 'relative flex items-center justify-center w-8 h-8',
     container: `${
       isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-        : 'bg-contrast/80 text-primary'
+        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast'
+        : 'bg-contrast/50'
     } ${
       y > 50 && !isHome && 'shadow-lightHeader'
     } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`,
@@ -89,7 +88,7 @@ function MobileHeader({
 
   return (
     <header role="banner" className={styles.container}>
-      <div className="flex items-center justify-start w-full gap-4">
+      <div className="flex w-full items-center justify-start gap-4">
         <button onClick={openMenu} className={styles.button}>
           <IconMenu />
         </button>
@@ -115,15 +114,15 @@ function MobileHeader({
       </div>
 
       <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
+        className="flex h-full w-full flex-grow items-center justify-center self-stretch leading-[3rem] md:leading-[4rem]"
         to="/"
       >
-        <Heading className="font-bold text-center" as={isHome ? 'h1' : 'h2'}>
+        <Heading className="text-center font-bold" as={isHome ? 'h1' : 'h2'}>
           {title}
         </Heading>
       </Link>
 
-      <div className="flex items-center justify-end w-full gap-4">
+      <div className="flex w-full items-center justify-end gap-4">
         <Link to={'/account'} className={styles.button}>
           <IconAccount />
         </Link>
@@ -220,9 +219,9 @@ function CartBadge({dark}: {dark: boolean}) {
     <div
       className={`${
         dark
-          ? 'text-primary bg-contrast dark:text-contrast dark:bg-primary'
+          ? 'bg-contrast dark:text-contrast text-primary dark:bg-primary'
           : 'text-contrast bg-primary'
-      } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
+      } absolute bottom-1 right-1 flex h-3 w-auto min-w-[0.75rem] items-center justify-center rounded-full px-[0.125rem] pb-px text-center text-[0.625rem] font-medium leading-none subpixel-antialiased`}
     >
       <span>{totalQuantity}</span>
     </div>

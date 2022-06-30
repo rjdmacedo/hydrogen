@@ -40,20 +40,24 @@ export default function Blog({
     },
   });
 
-  // TODO: How to fix this type?
-  const rawArticles = flattenConnection<Article>(data.blog.articles);
+  console.log(data);
 
-  const articles = rawArticles.map((article) => {
-    const {publishedAt} = article;
-    return {
-      ...article,
-      publishedAt: new Intl.DateTimeFormat(`${languageCode}-${countryCode}`, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }).format(new Date(publishedAt!)),
-    };
-  });
+  const articles = data.blog
+    ? flattenConnection<Article>(data?.blog.articles).map((article) => {
+        const {publishedAt} = article;
+        return {
+          ...article,
+          publishedAt: new Intl.DateTimeFormat(
+            `${languageCode}-${countryCode}`,
+            {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            },
+          ).format(new Date(publishedAt!)),
+        };
+      })
+    : [];
 
   const haveArticles = articles.length > 0;
 
@@ -69,10 +73,10 @@ export default function Blog({
             {articles.map((article, i) => {
               return (
                 <ArticleCard
-                  blogHandle={BLOG_HANDLE.toLowerCase()}
-                  article={article as Article}
                   key={article.id}
+                  article={article as Article}
                   loading={getImageLoadingPriority(i, 2)}
+                  blogHandle={BLOG_HANDLE.toLowerCase()}
                 />
               );
             })}
@@ -87,10 +91,10 @@ export default function Blog({
 
 const BLOG_QUERY = gql`
   query Blog(
-    $language: LanguageCode
-    $blogHandle: String!
     $pageBy: Int!
     $cursor: String
+    $language: LanguageCode
+    $blogHandle: String!
   ) @inContext(language: $language) {
     blog(handle: $blogHandle) {
       articles(first: $pageBy, after: $cursor) {

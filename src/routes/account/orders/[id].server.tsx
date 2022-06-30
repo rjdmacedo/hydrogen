@@ -88,31 +88,31 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
           <Text className="mt-2" as="p">
             Placed on {new Date(order.processedAt!).toDateString()}
           </Text>
-          <div className="grid items-start gap-12 sm:grid-cols-1 md:grid-cols-4 md:gap-16 sm:divide-y sm:divide-gray-200">
-            <table className="min-w-full my-8 divide-y divide-gray-300 md:col-span-3">
+          <div className="grid items-start gap-12 sm:grid-cols-1 sm:divide-y sm:divide-gray-200 md:grid-cols-4 md:gap-16">
+            <table className="my-8 min-w-full divide-y divide-gray-300 md:col-span-3">
               <thead>
                 <tr className="align-baseline ">
                   <th
                     scope="col"
-                    className="pb-4 pl-0 pr-3 font-semibold text-left"
+                    className="pb-4 pl-0 pr-3 text-left font-semibold"
                   >
                     Product
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-4 pb-4 font-semibold text-right sm:table-cell md:table-cell"
+                    className="hidden px-4 pb-4 text-right font-semibold sm:table-cell md:table-cell"
                   >
                     Price
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-4 pb-4 font-semibold text-right sm:table-cell md:table-cell"
+                    className="hidden px-4 pb-4 text-right font-semibold sm:table-cell md:table-cell"
                   >
                     Quantity
                   </th>
                   <th
                     scope="col"
-                    className="px-4 pb-4 font-semibold text-right"
+                    className="px-4 pb-4 text-right font-semibold"
                   >
                     Total
                   </th>
@@ -121,13 +121,13 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
               <tbody className="divide-y divide-gray-200">
                 {lineItems.map((lineItem) => (
                   <tr key={lineItem.variant!.id}>
-                    <td className="w-full py-4 pl-0 pr-3 align-top sm:align-middle max-w-0 sm:w-auto sm:max-w-none">
+                    <td className="w-full max-w-0 py-4 pl-0 pr-3 align-top sm:w-auto sm:max-w-none sm:align-middle">
                       <div className="flex gap-6">
                         <Link
                           to={`/products/${lineItem.variant!.product!.handle}`}
                         >
                           {lineItem?.variant?.image && (
-                            <div className="w-24 card-image aspect-square">
+                            <div className="card-image aspect-square w-24">
                               <Image
                                 src={lineItem.variant.image.src!}
                                 width={lineItem.variant.image.width!}
@@ -141,7 +141,7 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                             </div>
                           )}
                         </Link>
-                        <div className="flex-col justify-center hidden lg:flex">
+                        <div className="hidden flex-col justify-center lg:flex">
                           <Text as="p">{lineItem.title}</Text>
                           <Text size="fine" className="mt-1" as="p">
                             {lineItem.variant!.title}
@@ -172,13 +172,13 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                         </dl>
                       </div>
                     </td>
-                    <td className="hidden px-3 py-4 text-right align-top sm:align-middle sm:table-cell">
+                    <td className="hidden px-3 py-4 text-right align-top sm:table-cell sm:align-middle">
                       <Money data={lineItem.variant!.priceV2!} />
                     </td>
-                    <td className="hidden px-3 py-4 text-right align-top sm:align-middle sm:table-cell">
+                    <td className="hidden px-3 py-4 text-right align-top sm:table-cell sm:align-middle">
                       {lineItem.quantity}
                     </td>
-                    <td className="px-3 py-4 text-right align-top sm:align-middle sm:table-cell">
+                    <td className="px-3 py-4 text-right align-top sm:table-cell sm:align-middle">
                       <Text>
                         <Money data={lineItem.discountedTotalPrice!} />
                       </Text>
@@ -193,17 +193,17 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                     <th
                       scope="row"
                       colSpan={3}
-                      className="hidden pt-6 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
+                      className="hidden pt-6 pl-6 pr-3 text-right font-normal sm:table-cell md:pl-0"
                     >
                       <Text>Discounts</Text>
                     </th>
                     <th
                       scope="row"
-                      className="pt-6 pr-3 font-normal text-left sm:hidden"
+                      className="pt-6 pr-3 text-left font-normal sm:hidden"
                     >
                       <Text>Discounts</Text>
                     </th>
-                    <td className="pt-6 pl-3 pr-4 font-medium text-right text-green-700 md:pr-3">
+                    <td className="pt-6 pl-3 pr-4 text-right font-medium text-green-700 md:pr-3">
                       {discountPercentage ? (
                         <span className="text-sm">
                           -{discountPercentage}% OFF
@@ -218,13 +218,13 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                   <th
                     scope="row"
                     colSpan={3}
-                    className="hidden pt-6 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
+                    className="hidden pt-6 pl-6 pr-3 text-right font-normal sm:table-cell md:pl-0"
                   >
                     <Text>Subtotal</Text>
                   </th>
                   <th
                     scope="row"
-                    className="pt-6 pr-3 font-normal text-left sm:hidden"
+                    className="pt-6 pr-3 text-left font-normal sm:hidden"
                   >
                     <Text>Subtotal</Text>
                   </th>
@@ -236,13 +236,13 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                   <th
                     scope="row"
                     colSpan={3}
-                    className="hidden pt-4 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
+                    className="hidden pt-4 pl-6 pr-3 text-right font-normal sm:table-cell md:pl-0"
                   >
                     Tax
                   </th>
                   <th
                     scope="row"
-                    className="pt-4 pr-3 font-normal text-left sm:hidden"
+                    className="pt-4 pr-3 text-left font-normal sm:hidden"
                   >
                     <Text>Tax</Text>
                   </th>
@@ -254,23 +254,23 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                   <th
                     scope="row"
                     colSpan={3}
-                    className="hidden pt-4 pl-6 pr-3 font-semibold text-right sm:table-cell md:pl-0"
+                    className="hidden pt-4 pl-6 pr-3 text-right font-semibold sm:table-cell md:pl-0"
                   >
                     Total
                   </th>
                   <th
                     scope="row"
-                    className="pt-4 pr-3 font-semibold text-left sm:hidden"
+                    className="pt-4 pr-3 text-left font-semibold sm:hidden"
                   >
                     <Text>Total</Text>
                   </th>
-                  <td className="pt-4 pl-3 pr-4 font-semibold text-right md:pr-3">
+                  <td className="pt-4 pl-3 pr-4 text-right font-semibold md:pr-3">
                     <Money data={order.totalPriceV2!} />
                   </td>
                 </tr>
               </tfoot>
             </table>
-            <div className="sticky border-none top-nav md:my-8">
+            <div className="sticky top-nav border-none md:my-8">
               <Heading size="copy" className="font-semibold" as="h3">
                 Shipping Address
               </Heading>
@@ -300,7 +300,7 @@ export default function OrderDetails({response}: HydrogenRouteProps) {
                 Status
               </Heading>
               <div
-                className={`mt-3 px-3 py-1 text-xs font-medium rounded-full inline-block w-auto ${
+                className={`mt-3 inline-block w-auto rounded-full px-3 py-1 text-xs font-medium ${
                   order.fulfillmentStatus === 'FULFILLED'
                     ? 'bg-green-100 text-green-800'
                     : 'bg-primary/20 text-primary/50'

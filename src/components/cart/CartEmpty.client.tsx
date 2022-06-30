@@ -12,7 +12,7 @@ export function CartEmpty({onClose}: {onClose?: () => void}) {
   return (
     <div
       ref={scrollRef}
-      className={`grid content-start gap-4 px-6 pb-8 transition overflow-y-scroll md:gap-12 md:px-12 h-screen-no-nav md:pb-12 ${
+      className={`grid h-screen-no-nav content-start gap-4 overflow-y-scroll px-6 pb-8 transition md:gap-12 md:px-12 md:pb-12 ${
         y > 0 && 'border-t'
       }`}
     >
@@ -62,7 +62,7 @@ function Loading() {
         // eslint-disable-next-line react/no-array-index-key
         <div key={i} className="grid gap-2">
           <Skeleton className="aspect-[3/4]" />
-          <Skeleton className="w-32 h-4" />
+          <Skeleton className="h-4 w-32" />
         </div>
       ))}
     </>

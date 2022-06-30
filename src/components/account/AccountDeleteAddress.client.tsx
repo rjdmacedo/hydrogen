@@ -39,7 +39,7 @@ export function AccountDeleteAddress({
           Confirm
         </Button>
         <Button
-          className="text-sm mt-2"
+          className="mt-2 text-sm"
           onClick={close}
           variant="secondary"
           width="full"

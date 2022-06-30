@@ -32,7 +32,7 @@ export function Hero({
   return (
     <Link to={`/collections/${handle}`}>
       <section
-        className={`relative justify-end flex flex-col w-full ${
+        className={`relative flex w-full flex-col justify-end ${
           top && '-mt-nav'
         } ${
           height === 'full'
@@ -40,7 +40,7 @@ export function Hero({
             : 'aspect-[4/5] sm:aspect-square md:aspect-[5/4] lg:aspect-[3/2] xl:aspect-[2/1]'
         }`}
       >
-        <div className="absolute inset-0 grid flex-grow grid-flow-col pointer-events-none auto-cols-fr -z-10 content-stretch overflow-clip">
+        <div className="content-stretch pointer-events-none absolute inset-0 -z-10 grid flex-grow auto-cols-fr grid-flow-col overflow-clip">
           {spread?.reference && (
             <div className="">
               <SpreadMedia
@@ -72,7 +72,7 @@ export function Hero({
             </div>
           )}
         </div>
-        <div className="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast">
+        <div className="flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t from-primary/60 px-6 py-8 text-contrast dark:from-contrast/60 dark:text-primary sm:px-8 md:px-12">
           {heading?.value && (
             <Heading format as="h2" size="display" className="max-w-md">
               {heading.value}
@@ -112,7 +112,7 @@ function SpreadMedia({
       <Video
         previewImageOptions={{scale, src: data.previewImage!.url}}
         width={scale! * width}
-        className="block object-cover w-full h-full"
+        className="block h-full w-full object-cover"
         data={data}
         controls={false}
         muted
@@ -129,7 +129,7 @@ function SpreadMedia({
         widths={widths}
         sizes={sizes}
         alt={data.alt || 'Marketing Banner Image'}
-        className="block object-cover w-full h-full"
+        className="block h-full w-full object-cover"
         // @ts-ignore
         data={data.image}
         loading={loading}

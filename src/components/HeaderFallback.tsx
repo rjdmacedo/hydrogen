@@ -5,10 +5,10 @@ export function HeaderFallback({isHome}: {isHome?: boolean}) {
   return (
     <header
       role="banner"
-      className={`${styles} flex h-nav items-center backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+      className={`${styles} h-nav top-0 z-40 flex w-full items-center justify-between gap-8 px-12 py-8 leading-none backdrop-blur-lg`}
     >
       <div className="flex space-x-4">
-        <Box isHome={isHome} />
+        <Box wide isHome={isHome} />
         <Box isHome={isHome} />
         <Box isHome={isHome} />
         <Box isHome={isHome} />
@@ -22,7 +22,7 @@ export function HeaderFallback({isHome}: {isHome?: boolean}) {
 function Box({wide, isHome}: {wide?: boolean; isHome?: boolean}) {
   return (
     <div
-      className={`h-6 rounded-sm ${wide ? 'w-32' : 'w-16'} ${
+      className={`h-8 rounded-sm ${wide ? 'w-32' : 'w-16'} ${
         isHome ? 'bg-primary/60' : 'bg-primary/20'
       }`}
     />

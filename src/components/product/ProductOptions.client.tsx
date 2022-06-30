@@ -50,7 +50,7 @@ function OptionsGrid({
               onChange={() => handleChange(name, value)}
             />
             <div
-              className={`leading-none py-1 border-b-[1.5px] cursor-pointer transition-all duration-200 ${
+              className={`cursor-pointer border-b-[1.5px] py-1 leading-none transition-all duration-200 ${
                 checked ? 'border-primary/50' : 'border-primary/0'
               }`}
             >
@@ -92,7 +92,7 @@ function OptionsDropdown({
           return (
             <>
               <Listbox.Button
-                className={`flex items-center justify-between w-full py-3 px-4 border border-primary ${
+                className={`flex w-full items-center justify-between border border-primary py-3 px-4 ${
                   open ? 'rounded-b md:rounded-t md:rounded-b-none' : 'rounded'
                 }`}
               >
@@ -101,8 +101,8 @@ function OptionsDropdown({
               </Listbox.Button>
 
               <Listbox.Options
-                className={`border-primary bg-contrast absolute bottom-12 z-30 grid
-                h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height]
+                className={`absolute bottom-12 z-30 grid h-48 w-full
+                overflow-y-scroll rounded-t border border-primary bg-contrast px-2 py-2 transition-[max-height]
                 duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b ${
                   listboxOpen ? 'max-h-48' : 'max-h-0'
                 }`}
@@ -116,7 +116,7 @@ function OptionsDropdown({
                       {/* @ts-expect-error @headlessui/react incompatibility with node16 resolution */}
                       {({active}) => (
                         <div
-                          className={`text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer ${
+                          className={`flex w-full cursor-pointer items-center justify-start rounded p-2 text-left text-primary transition ${
                             active ? 'bg-primary/10' : null
                           }`}
                         >

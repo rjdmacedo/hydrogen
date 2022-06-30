@@ -36,8 +36,8 @@ export function AccountRecoverForm() {
   }
 
   return (
-    <div className="flex justify-center my-24 px-4">
-      <div className="max-w-md w-full">
+    <div className="my-24 flex justify-center px-4">
+      <div className="w-full max-w-md">
         {submitSuccess ? (
           <>
             <h1 className="text-4xl">Request Sent.</h1>
@@ -56,15 +56,15 @@ export function AccountRecoverForm() {
             </p>
           </>
         )}
-        <form noValidate className="pt-6 pb-8 mt-4 mb-4" onSubmit={onSubmit}>
+        <form noValidate className="mt-4 mb-4 pt-6 pb-8" onSubmit={onSubmit}>
           {submitError && (
-            <div className="flex items-center justify-center mb-6 bg-zinc-500">
-              <p className="m-4 text-s text-contrast">{submitError}</p>
+            <div className="mb-6 flex items-center justify-center bg-zinc-500">
+              <p className="text-s m-4 text-contrast">{submitError}</p>
             </div>
           )}
           <div className="mb-3">
             <input
-              className={`mb-1 rounded appearance-none border w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline ${
+              className={`focus:shadow-outline mb-1 w-full appearance-none rounded border py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50 ${
                 emailError ? ' border-red-500' : 'border-gray-900'
               }`}
               id="email"
@@ -84,12 +84,12 @@ export function AccountRecoverForm() {
             {!emailError ? (
               ''
             ) : (
-              <p className={`text-red-500 text-xs`}>{emailError} &nbsp;</p>
+              <p className={`text-xs text-red-500`}>{emailError} &nbsp;</p>
             )}
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-gray-900 text-contrast rounded py-2 px-4 focus:shadow-outline block w-full"
+              className="focus:shadow-outline block w-full rounded bg-gray-900 py-2 px-4 text-contrast"
               type="submit"
             >
               Request Reset Link

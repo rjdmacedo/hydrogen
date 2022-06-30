@@ -17,7 +17,7 @@ export function ArticleCard({
           <div className="card-image aspect-[3/2]">
             <Image
               alt={article.image.altText || article.title}
-              className="object-cover w-full"
+              className="w-full object-cover"
               data={article.image}
               height={400}
               loading={loading}
@@ -31,7 +31,7 @@ export function ArticleCard({
           </div>
         )}
         <h2 className="mt-4 font-medium">{article.title}</h2>
-        <span className="block mt-1">{article.publishedAt}</span>
+        <span className="mt-1 block">{article.publishedAt}</span>
       </Link>
     </li>
   );

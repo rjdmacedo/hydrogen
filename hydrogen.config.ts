@@ -1,6 +1,7 @@
 import {defineConfig, CookieSessionStorage} from '@shopify/hydrogen/config';
 
 export default defineConfig({
+  logger: {},
   shopify: {
     storeDomain: import.meta.env.VITE_STOREFRONT_DOMAIN || '',
     storefrontToken: import.meta.env.VITE_STOREFRONT_TOKEN || '',

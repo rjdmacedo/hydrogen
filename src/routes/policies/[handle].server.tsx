@@ -71,11 +71,11 @@ export default function Policy({params}: HydrogenRouteProps) {
       <Section
         padding="all"
         display="flex"
-        className="flex-col items-baseline w-full gap-8 md:flex-row"
+        className="w-full flex-col items-baseline gap-8 md:flex-row"
       >
         <PageHeader
           heading={page.title}
-          className="grid items-start flex-grow gap-4 md:sticky top-36 md:w-5/12"
+          className="top-36 grid flex-grow items-start gap-4 md:sticky md:w-5/12"
         >
           <Button
             className="justify-self-start"
@@ -85,7 +85,7 @@ export default function Policy({params}: HydrogenRouteProps) {
             &larr; Back to Policies
           </Button>
         </PageHeader>
-        <div className="flex-grow w-full md:w-7/12">
+        <div className="w-full flex-grow md:w-7/12">
           <div
             dangerouslySetInnerHTML={{__html: page.body}}
             className="prose dark:prose-invert"

@@ -27,11 +27,11 @@ export function CartLineItem() {
             scale: 2,
             crop: 'center',
           }}
-          className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
+          className="h-24 w-24 rounded border object-cover object-center md:h-28 md:w-28"
         />
       </div>
 
-      <div className="flex justify-between flex-grow">
+      <div className="flex flex-grow justify-between">
         <div className="grid gap-2">
           <Heading as="h3" size="copy">
             <Link to={`/products/${merchandise.product.handle}`}>
@@ -54,7 +54,7 @@ export function CartLineItem() {
             <button
               type="button"
               onClick={() => linesRemove([lineId])}
-              className="flex items-center justify-center w-10 h-10 border rounded"
+              className="flex h-10 w-10 items-center justify-center rounded border"
             >
               <span className="sr-only">Remove</span>
               <IconRemove aria-hidden="true" />
@@ -81,11 +81,11 @@ function CartLineQuantityAdjust({
       <label htmlFor={`quantity-${lineId}`} className="sr-only">
         Quantity, {quantity}
       </label>
-      <div className="flex items-center border rounded">
+      <div className="flex items-center rounded border">
         <CartLineQuantityAdjustButton
           adjust="decrease"
           aria-label="Decrease quantity"
-          className="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait"
+          className="h-10 w-10 text-primary/50 transition hover:text-primary disabled:cursor-wait"
         >
           &#8722;
         </CartLineQuantityAdjustButton>
@@ -93,7 +93,7 @@ function CartLineQuantityAdjust({
         <CartLineQuantityAdjustButton
           adjust="increase"
           aria-label="Increase quantity"
-          className="w-10 h-10 transition text-primary/50 hover:text-primary disabled:cursor-wait"
+          className="h-10 w-10 text-primary/50 transition hover:text-primary disabled:cursor-wait"
         >
           &#43;
         </CartLineQuantityAdjustButton>
