@@ -6,7 +6,6 @@ import {
   useMoney,
   flattenConnection,
 } from '@shopify/hydrogen';
-
 import {Text} from '~/components';
 import {isDiscounted, isNewArrival} from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
@@ -16,6 +15,8 @@ import type {
   ProductVariant,
   ProductVariantConnection,
 } from '@shopify/hydrogen/storefront-api-types';
+// @ts-ignore
+import {Badge} from 'react-daisyui';
 
 export function ProductCard({
   label,
@@ -56,16 +57,14 @@ export function ProductCard({
     <Link onClick={onClick} to={`/products/${product.handle}`}>
       <div className={styles}>
         <div className="card-image aspect-[4/5] bg-primary/5">
-          <Text
-            as="label"
-            size="fine"
-            className="absolute top-0 right-0 z-10 m-4 text-right text-notice"
-          >
-            {cardLabel}
-          </Text>
+          <Badge size="lg" className="absolute top-0 right-0 z-10 mr-2 mt-2">
+            <Text as="label" size="fine" className="text-notice text-right">
+              {cardLabel}
+            </Text>
+          </Badge>
           {image && (
             <Image
-              className="fadeIn aspect-[4/5] w-full object-cover"
+              className="fade-in aspect-[4/5] w-full object-cover"
               widths={[320]}
               sizes="320px"
               loaderOptions={{

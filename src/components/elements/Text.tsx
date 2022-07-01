@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 import {missingClass, formatText} from '~/lib/utils';
+import React from 'react';
 
 export function Text({
   as: Component = 'span',

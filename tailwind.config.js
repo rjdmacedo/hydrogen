@@ -1,24 +1,11 @@
 /* Tailwind Configuration Docs: https://tailwindcss.com/docs/configuration */
 
-function withOpacityValue(variable) {
-  return ({opacityValue}) => {
-    if (opacityValue === undefined) {
-      return `rgb(var(${variable}))`;
-    }
-    return `rgb(var(${variable}) / ${opacityValue})`;
-  };
-}
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  safelist: [{pattern: /./}], // added because of https://github.com/daisyui/react-daisyui
   theme: {
     extend: {
-      colors: {
-        primary: withOpacityValue('--color-primary'),
-        contrast: withOpacityValue('--color-contrast'),
-        notice: withOpacityValue('--color-accent'),
-      },
       screens: {
         sm: '32em',
         md: '48em',

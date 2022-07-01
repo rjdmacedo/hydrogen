@@ -4391,6 +4391,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-daisyui@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-daisyui/-/react-daisyui-2.0.4.tgz#17d8a494b65ba45875cb48753d2e81d14315054b"
+  integrity sha512-hse9zEmSz/rf7icFEOivgygLNJhbw49LCQuDH6YkiJJkt4WDKy8S6K6RMrW/SRaFJUcIXhjwmQf9EtEJUnTMnA==
+
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"

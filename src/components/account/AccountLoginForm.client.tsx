@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useNavigate, Link} from '@shopify/hydrogen/client';
+import {Input} from '~/components';
 
 interface FormElements {
   email: HTMLInputElement;
@@ -78,7 +79,7 @@ export function AccountLoginForm({shopName}: {shopName: string}) {
         <form noValidate className="mt-4 mb-4 pt-6 pb-8" onSubmit={onSubmit}>
           {hasSubmitError && (
             <div className="mb-6 flex items-center justify-center bg-zinc-500">
-              <p className="text-s m-4 text-contrast">
+              <p className="text-s text-contrast m-4">
                 Sorry we did not recognize either your email or password. Please
                 try to sign in again or create a new account.
               </p>
@@ -150,21 +151,20 @@ function EmailField({
   return (
     <>
       <div className="mb-3">
-        <input
-          className={`focus:shadow-outline mb-1 w-full appearance-none rounded border py-2 px-3 leading-tight text-primary/90 placeholder:text-primary/50 ${
-            emailError ? ' border-red-500' : 'border-gray-900'
+        <Input
+          className={`mb-1 w-full leading-tight ${
+            emailError && 'border-red-500'
           }`}
+          required
+          size={'lg'}
           id="email"
           name="email"
           type="email"
+          value={email}
           autoComplete="email"
-          required
           placeholder="Email address"
           aria-label="Email address"
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-          value={email}
-          onChange={(event) => {
+          onChange={(event: any) => {
             setEmail(event.target.value);
           }}
         />
@@ -175,10 +175,7 @@ function EmailField({
         )}
       </div>
       <div className="flex items-center justify-between">
-        <button
-          className="focus:shadow-outline block w-full rounded bg-gray-900 py-2 px-4 text-contrast"
-          type="submit"
-        >
+        <button className="btn btn-primary btn-block" type="submit">
           Next
         </button>
       </div>
@@ -265,7 +262,7 @@ function PasswordField({
       </div>
       <div className="flex items-center justify-between">
         <button
-          className="focus:shadow-outline block w-full rounded bg-gray-900 py-2 px-4 text-contrast"
+          className="focus:shadow-outline text-contrast block w-full rounded bg-gray-900 py-2 px-4"
           type="submit"
         >
           Sign in

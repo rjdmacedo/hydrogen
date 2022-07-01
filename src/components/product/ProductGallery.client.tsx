@@ -84,7 +84,7 @@ export function ProductGallery({
           >
             <MediaFile
               tabIndex="0"
-              className={`fadeIn aspect-square h-full w-full object-cover`}
+              className={`fade-in aspect-square h-full w-full object-cover`}
               data={data}
               sizes={
                 isFullWidth

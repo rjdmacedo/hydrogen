@@ -1,35 +1,35 @@
 import clsx from 'clsx';
+import React from 'react';
 import {Link} from '@shopify/hydrogen';
-
 import {missingClass} from '~/lib/utils';
 
 export function Button({
   as = 'button',
-  className = '',
-  variant = 'primary',
   width = 'auto',
+  circle = false,
+  variant = 'primary',
+  className = '',
   ...props
 }: {
   as?: React.ElementType;
-  className?: string;
-  variant?: 'primary' | 'secondary' | 'inline';
   width?: 'auto' | 'full';
+  circle?: boolean;
+  variant?: 'primary' | 'secondary';
+  className?: string;
   [key: string]: any;
 }) {
   const Component = props?.to ? Link : as;
 
-  const baseButtonClasses =
-    'inline-block rounded font-medium text-center py-3 px-6 max-w-xl';
+  const baseButtonClasses = 'btn';
 
   const variants = {
-    primary: `${baseButtonClasses} bg-primary text-contrast`,
-    secondary: `${baseButtonClasses} border border-primary/10 bg-contrast text-primary`,
-    inline: 'border-b border-primary/10 leading-none pb-1',
+    primary: `${baseButtonClasses} btn-primary`,
+    secondary: `${baseButtonClasses} btn-secondary`,
   };
 
   const widths = {
     auto: 'w-auto',
-    full: 'w-full',
+    full: 'btn-block',
   };
 
   const styles = clsx(

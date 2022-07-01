@@ -61,7 +61,7 @@ export default function Product() {
         <Seo type="product" data={product} />
       </Suspense>
       <ProductOptionsProvider data={product}>
-        <Section padding="x" className="px-0">
+        <Section className="px-0">
           <div className="grid items-start md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-20">
             <ProductGallery
               media={media.nodes}

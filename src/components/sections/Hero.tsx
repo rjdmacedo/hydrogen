@@ -72,7 +72,7 @@ export function Hero({
             </div>
           )}
         </div>
-        <div className="flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t from-primary/60 px-6 py-8 text-contrast dark:from-contrast/60 dark:text-primary sm:px-8 md:px-12">
+        <div className="text-contrast dark:from-contrast/60 flex flex-col items-baseline justify-between gap-4 bg-gradient-to-t from-primary/60 px-6 py-8 dark:text-primary sm:px-8 md:px-12">
           {heading?.value && (
             <Heading format as="h2" size="display" className="max-w-md">
               {heading.value}

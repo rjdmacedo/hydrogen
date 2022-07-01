@@ -1,7 +1,8 @@
+// @ts-ignore
+import {Badge, Button} from 'react-daisyui';
 import {useWindowScroll} from 'react-use';
-import {Link, useUrl, useCart} from '@shopify/hydrogen';
-
 import type {EnhancedMenu} from '~/lib/utils';
+import {Link, useUrl, useCart} from '@shopify/hydrogen';
 
 import {
   Input,
@@ -14,6 +15,7 @@ import {
 } from '~/components';
 import {CartDrawer} from './CartDrawer.client';
 import {MenuDrawer} from './MenuDrawer.client';
+import {Spinner} from '~/components/elements/Spinner';
 
 /**
  * A client component that specifies the content of the header on the website
@@ -74,16 +76,13 @@ function MobileHeader({
   countryCode?: string | null;
 }) {
   const {y} = useWindowScroll();
+  const {totalQuantity} = useCart();
 
   const styles = {
     button: 'relative flex items-center justify-center w-8 h-8',
     container: `${
-      isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast'
-        : 'bg-contrast/50'
-    } ${
-      y > 50 && !isHome && 'shadow-lightHeader'
-    } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`,
+      y > 20 && 'drop-shadow-lg backdrop-blur-xl'
+    } flex lg:hidden sticky top-0 z-40 w-full items-center justify-between gap-4 bg-base-100/70 p-4 leading-none transition duration-300 focus:hidden`,
   };
 
   return (
@@ -100,15 +99,11 @@ function MobileHeader({
             <IconSearch />
           </button>
           <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
             name="q"
+            size="sm"
+            type="search"
+            placeholder="Search"
+            className="hidden md:block"
           />
         </form>
       </div>
@@ -128,7 +123,15 @@ function MobileHeader({
         </Link>
         <button onClick={openCart} className={styles.button}>
           <IconBag />
-          <CartBadge dark={isHome} />
+          {totalQuantity > 0 && (
+            <Badge
+              size="sm"
+              color="primary"
+              className="absolute -right-3 -top-2"
+            >
+              {totalQuantity}
+            </Badge>
+          )}
         </button>
       </div>
     </header>
@@ -149,23 +152,18 @@ function DesktopHeader({
   countryCode?: string | null;
 }) {
   const {y} = useWindowScroll();
+  const {status, totalQuantity} = useCart();
 
   const styles = {
-    button:
-      'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5',
     container: `${
-      isHome
-        ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-        : 'bg-contrast/80 text-primary'
-    } ${
-      y > 50 && !isHome && 'shadow-lightHeader'
-    } hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`,
+      y > 20 && 'drop-shadow-lg backdrop-blur-xl'
+    } hidden lg:block sticky top-0 z-40 h-nav w-full items-center justify-between gap-8 bg-base-100/70 py-4 px-12 leading-none transition duration-300 focus:hidden lg:flex`,
   };
 
   return (
     <header role="banner" className={styles.container}>
       <div className="flex gap-12">
-        <Link className={`font-bold`} to="/">
+        <Link className="font-bold" to="/">
           {title}
         </Link>
         <nav className="flex gap-8">
@@ -179,51 +177,57 @@ function DesktopHeader({
       </div>
       <div className="flex items-center gap-1">
         <form
-          action={`/${countryCode ? countryCode + '/' : ''}search`}
           className="flex items-center gap-2"
+          action={`/${countryCode ? countryCode + '/' : ''}search`}
         >
           <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
             name="q"
+            size="sm"
+            type="search"
+            placeholder="Search"
+            className="w-48 duration-500 focus:w-72 focus:outline-0"
           />
-          <button type="submit" className={styles.button}>
+          <Button
+            size="sm"
+            type="submit"
+            shape="circle"
+            variant="outline"
+            className="ml-1"
+          >
             <IconSearch />
-          </button>
+          </Button>
         </form>
-        <Link to={'/account'} className={styles.button}>
+        <Button
+          size="sm"
+          href="/account"
+          shape="circle"
+          variant="outline"
+          className="ml-1"
+        >
           <IconAccount />
-        </Link>
-        <button onClick={openCart} className={styles.button}>
-          <IconBag />
-          <CartBadge dark={isHome} />
-        </button>
+        </Button>
+        <div className="indicator">
+          {totalQuantity > 0 && (
+            <span className="badge indicator-item badge-error">
+              {totalQuantity}
+            </span>
+          )}
+          <Button
+            size="sm"
+            animation
+            shape="circle"
+            variant="outline"
+            className="ml-1"
+            onClick={openCart}
+          >
+            {status !== 'idle' ? (
+              <Spinner size="sm" />
+            ) : (
+              <IconBag className="fade-in" />
+            )}
+          </Button>
+        </div>
       </div>
     </header>
-  );
-}
-
-function CartBadge({dark}: {dark: boolean}) {
-  const {totalQuantity} = useCart();
-
-  if (totalQuantity < 1) {
-    return null;
-  }
-  return (
-    <div
-      className={`${
-        dark
-          ? 'bg-contrast dark:text-contrast text-primary dark:bg-primary'
-          : 'text-contrast bg-primary'
-      } absolute bottom-1 right-1 flex h-3 w-auto min-w-[0.75rem] items-center justify-center rounded-full px-[0.125rem] pb-px text-center text-[0.625rem] font-medium leading-none subpixel-antialiased`}
-    >
-      <span>{totalQuantity}</span>
-    </div>
   );
 }
