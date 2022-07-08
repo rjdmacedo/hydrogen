@@ -1,42 +1,92 @@
 import clsx from 'clsx';
 import React from 'react';
 import {Link} from '@shopify/hydrogen';
-import {missingClass} from '~/lib/utils';
 
 export function Button({
-  as = 'button',
-  width = 'auto',
-  circle = false,
-  variant = 'primary',
-  className = '',
+  to = '',
+  size = 'md', //
+  type = 'button', //
+  width = 'auto', //
+  shape = null, //
+  color = 'ghost', //
+  active = false, //
+  variant = null, //
+  endIcon = null, //
+  loading = false, //
+  animation = false, //
+  className = '', //
+  startIcon = null, //
+  responsive = true,
+  disabled = false, //
+  children,
   ...props
 }: {
-  as?: React.ElementType;
+  to?: string;
+  href?: null | string;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   width?: 'auto' | 'full';
-  circle?: boolean;
-  variant?: 'primary' | 'secondary';
+  shape?: null | 'circle' | 'square';
+  color?:
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'ghost';
+  active?: boolean;
+  variant?: null | 'outline' | 'link';
+  endIcon?: React.ReactNode;
+  loading?: boolean;
   className?: string;
+  animation?: boolean;
+  startIcon?: React.ReactNode;
+  responsive?: boolean;
+  children: React.ReactNode;
+  disabled?: boolean;
   [key: string]: any;
 }) {
-  const Component = props?.to ? Link : as;
-
-  const baseButtonClasses = 'btn';
-
-  const variants = {
-    primary: `${baseButtonClasses} btn-primary`,
-    secondary: `${baseButtonClasses} btn-secondary`,
-  };
-
-  const widths = {
-    auto: 'w-auto',
-    full: 'btn-block',
-  };
-
   const styles = clsx(
-    missingClass(className, 'bg-') && variants[variant],
-    missingClass(className, 'w-') && widths[width],
+    'btn',
+    size && `btn-${size}`,
+    width === 'full' && 'btn-block',
+    shape && `btn-${shape}`,
+    color && `btn-${color}`,
+    active && 'btn-active',
+    variant && `btn-${variant}`,
+    loading && 'loading',
+    !animation && 'no-animation',
     className,
   );
 
-  return <Component className={styles} {...props} />;
+  const iconSize =
+    size === 'xs' ? 4 : size === 'sm' ? 4 : size === 'md' ? 5 : 6;
+
+  return to ? (
+    <Link to={to} className={styles}>
+      {startIcon && startIcon}
+      {children}
+      {endIcon && endIcon}
+    </Link>
+  ) : (
+    <button
+      type={type}
+      disabled={disabled}
+      className={styles}
+      aria-disabled={disabled}
+      {...props}
+    >
+      {startIcon && (
+        <span className={`mr-1.5 h-${iconSize} w-${iconSize}`}>
+          {startIcon}
+        </span>
+      )}
+      {children}
+      {endIcon && (
+        <span className={`ml-1.5 h-${iconSize} w-${iconSize}`}>{endIcon}</span>
+      )}
+    </button>
+  );
 }

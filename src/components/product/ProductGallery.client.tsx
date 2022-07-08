@@ -5,20 +5,14 @@ import {ATTR_LOADING_EAGER} from '~/lib/const';
 /**
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
-export function ProductGallery({
-  media,
-  className,
-}: {
-  media: MediaEdge['node'][];
-  className?: string;
-}) {
+export function ProductGallery({media, className}: ProductGalleryProps) {
   if (!media.length) {
     return null;
   }
 
   return (
     <div
-      className={`swimlane hiddenScroll md:grid-flow-row md:grid-cols-2 md:overflow-x-auto md:p-0 ${className}`}
+      className={`swimlane hidden-scroll md:grid-flow-row md:grid-cols-2 md:overflow-x-auto md:p-0 ${className}`}
     >
       {media.map((med, i) => {
         let mediaProps: Record<string, any> = {};
@@ -44,12 +38,12 @@ export function ProductGallery({
             break;
           case 'VIDEO':
             mediaProps = {
+              loop: true,
               width: '100%',
+              muted: true,
+              preload: 'auto',
               autoPlay: true,
               controls: false,
-              muted: true,
-              loop: true,
-              preload: 'auto',
             };
             break;
           case 'EXTERNAL_VIDEO':
@@ -57,11 +51,11 @@ export function ProductGallery({
             break;
           case 'MODEL_3D':
             mediaProps = {
-              width: '100%',
-              interactionPromptThreshold: '0',
               ar: true,
-              loading: ATTR_LOADING_EAGER,
+              width: '100%',
               disableZoom: true,
+              loading: ATTR_LOADING_EAGER,
+              interactionPromptThreshold: '0',
             };
             break;
         }
@@ -73,15 +67,12 @@ export function ProductGallery({
         const style = [
           isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
           isFirst || isFourth ? '' : 'md:aspect-[4/5]',
-          'aspect-square snap-center card-image bg-white dark:bg-contrast/10 w-mobileGallery md:w-full',
+          'aspect-[3/4] snap-center card-image w-mobile-gallery md:w-full',
         ].join(' ');
 
         return (
-          <div
-            className={style}
-            // @ts-ignore
-            key={med.id || med.image.id}
-          >
+          // @ts-ignore
+          <div className={style} key={med.id || med.image.id}>
             <MediaFile
               tabIndex="0"
               className={`fade-in aspect-square h-full w-full object-cover`}
@@ -103,3 +94,8 @@ export function ProductGallery({
     </div>
   );
 }
+
+type ProductGalleryProps = {
+  media: MediaEdge['node'][];
+  className?: string;
+};

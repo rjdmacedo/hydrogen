@@ -10,6 +10,7 @@ import {
   type HydrogenRouteProps,
   type HydrogenRequest,
   type HydrogenApiRouteOptions,
+  isBrowser,
 } from '@shopify/hydrogen';
 
 import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
@@ -18,6 +19,7 @@ import {
   AccountAddressBook,
   AccountDetails,
   AccountOrderHistory,
+  Button,
   FeaturedCollections,
   LogoutButton,
   PageHeader,
@@ -32,17 +34,21 @@ import type {
   Product,
   ProductConnection,
 } from '@shopify/hydrogen/storefront-api-types';
+import {useNavigate} from '@shopify/hydrogen/client';
+import {MoonIcon} from '@heroicons/react/solid';
 
 export default function Account({response}: HydrogenRouteProps) {
   response.cache(CacheNone());
 
   const {
-    language: {isoCode: languageCode},
     country: {isoCode: countryCode},
+    language: {isoCode: languageCode},
   } = useLocalization();
   const {customerAccessToken} = useSession();
 
-  if (!customerAccessToken) return response.redirect('/account/login');
+  if (!customerAccessToken) {
+    return response.redirect('/account/login');
+  }
 
   const {data} = useShopQuery<{
     customer: Customer;

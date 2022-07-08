@@ -1,6 +1,6 @@
+import {Link} from '@shopify/hydrogen';
 // @ts-expect-error @headlessui/react incompatibility with node16 resolution
 import {Disclosure} from '@headlessui/react';
-import {Link} from '@shopify/hydrogen';
 
 import {Heading, IconCaret} from '~/components';
 import type {EnhancedMenu, EnhancedMenuItem} from '~/lib/utils';
@@ -10,8 +10,8 @@ import type {EnhancedMenu, EnhancedMenuItem} from '~/lib/utils';
  */
 export function FooterMenu({menu}: {menu?: EnhancedMenu}) {
   const styles = {
-    section: 'grid gap-4',
     nav: 'grid gap-2 pb-6',
+    section: 'grid gap-4',
   };
 
   return (
@@ -57,7 +57,7 @@ export function FooterMenu({menu}: {menu?: EnhancedMenu}) {
             )}
           </Disclosure>
         </section>
-      ))}{' '}
+      ))}
     </>
   );
 }

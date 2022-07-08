@@ -1,3 +1,5 @@
+import {Button} from '~/components';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
 }
@@ -13,8 +15,8 @@ export function LogoutButton(props: ButtonProps) {
   };
 
   return (
-    <button className="text-primary/50" {...props} onClick={logout}>
+    <Button size="sm" variant="outline" onClick={logout}>
       Logout
-    </button>
+    </Button>
   );
 }

@@ -6,6 +6,9 @@ module.exports = {
   safelist: [{pattern: /./}], // added because of https://github.com/daisyui/react-daisyui
   theme: {
     extend: {
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
       screens: {
         sm: '32em',
         md: '48em',
@@ -29,7 +32,7 @@ module.exports = {
           'calc(var(--screen-height, 100vh) - var(--height-nav))',
       },
       width: {
-        mobileGallery: 'calc(100vw - 3rem)',
+        'mobile-gallery': 'calc(100vw - 3rem)',
       },
       fontFamily: {
         sans: ['Helvetica Neue', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -75,16 +78,16 @@ module.exports = {
       },
       {
         dark: {
-          primary: '#ff79c6',
-          secondary: '#bd93f9',
-          accent: '#ffb86c',
-          neutral: '#414558',
-          'base-100': '#282a36',
+          primary: '#3b82f6',
+          secondary: '#7c3aed',
+          accent: '#1FB2A6',
+          neutral: '#374151',
+          info: '#3b82f6',
+          success: '#16a34a',
+          warning: '#facc15',
+          error: '#ef4444',
+          'base-100': '#2A303C',
           'base-content': '#f8f8f2',
-          info: '#8be9fd',
-          success: '#50fa7b',
-          warning: '#f1fa8c',
-          error: '#ff5555',
         },
       },
     ],

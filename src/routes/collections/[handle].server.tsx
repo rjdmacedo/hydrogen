@@ -1,40 +1,39 @@
-import {Suspense} from 'react';
 import {
   gql,
-  type HydrogenRouteProps,
   Seo,
-  ShopifyAnalyticsConstants,
-  useServerAnalytics,
-  useLocalization,
   useShopQuery,
+  useLocalization,
+  useServerAnalytics,
   type HydrogenRequest,
+  type HydrogenRouteProps,
+  ShopifyAnalyticsConstants,
   type HydrogenApiRouteOptions,
 } from '@shopify/hydrogen';
-
+import {Suspense} from 'react';
 import {PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
-import {PageHeader, ProductGrid, Section, Text} from '~/components';
 import {NotFound, Layout} from '~/components/index.server';
+import {PageHeader, ProductGrid, Section, Text} from '~/components';
 
 const pageBy = 48;
 
 export default function Collection({params}: HydrogenRouteProps) {
   const {handle} = params;
   const {
-    language: {isoCode: language},
     country: {isoCode: country},
+    language: {isoCode: language},
   } = useLocalization();
 
   const {
     data: {collection},
   } = useShopQuery({
+    preload: true,
     query: COLLECTION_QUERY,
     variables: {
       handle,
-      language,
-      country,
       pageBy,
+      country,
+      language,
     },
-    preload: true,
   });
 
   if (!collection) {
@@ -56,19 +55,17 @@ export default function Collection({params}: HydrogenRouteProps) {
       <PageHeader heading={collection.title}>
         {collection?.description && (
           <div className="flex w-full items-baseline justify-between">
-            <div>
-              <Text format width="narrow" as="p" className="inline-block">
-                {collection.description}
-              </Text>
-            </div>
+            <Text format width="narrow" as="p" className="inline-block">
+              {collection.description}
+            </Text>
           </div>
         )}
       </PageHeader>
       <Section>
         <ProductGrid
           key="collections"
-          collection={collection}
           url={`/collections/${handle}?country=${country}`}
+          collection={collection}
         />
       </Section>
     </Layout>

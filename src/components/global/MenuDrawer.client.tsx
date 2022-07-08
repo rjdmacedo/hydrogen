@@ -13,9 +13,7 @@ export function MenuDrawer({
 }) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
-      <div className="grid">
-        <MenuMobileNav menu={menu} onClose={onClose} />
-      </div>
+      <MenuMobileNav menu={menu} onClose={onClose} />
     </Drawer>
   );
 }

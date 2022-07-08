@@ -14,11 +14,11 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 
 export function NotFound({
-  response,
   type = 'page',
+  response,
 }: {
-  response?: HydrogenResponse;
   type?: string;
+  response?: HydrogenResponse;
 }) {
   if (response) {
     response.doNotStream();
@@ -27,32 +27,32 @@ export function NotFound({
   }
 
   const {
-    language: {isoCode: languageCode},
     country: {isoCode: countryCode},
+    language: {isoCode: languageCode},
   } = useLocalization();
 
   const {data} = useShopQuery<{
-    featuredCollections: CollectionConnection;
     featuredProducts: ProductConnection;
+    featuredCollections: CollectionConnection;
   }>({
+    preload: true,
     query: NOT_FOUND_QUERY,
     variables: {
-      language: languageCode,
       country: countryCode,
+      language: languageCode,
     },
-    preload: true,
   });
 
   const heading = `We’ve lost this ${type}`;
   const description = `We couldn’t find the ${type} you’re looking for. Try checking the URL or heading back to the home page.`;
-  const {featuredCollections, featuredProducts} = data;
+  const {featuredProducts, featuredCollections} = data;
   return (
     <Layout>
       <PageHeader heading={heading}>
         <Text width="narrow" as="p">
           {description}
         </Text>
-        <Button width="auto" variant="secondary" to={'/'}>
+        <Button width="auto" color="primary" to="/">
           Take me to the home page
         </Button>
       </PageHeader>

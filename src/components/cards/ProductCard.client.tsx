@@ -24,13 +24,7 @@ export function ProductCard({
   product,
   onClick,
   className,
-}: {
-  label?: string;
-  loading?: HTMLImageElement['loading'];
-  product: Product;
-  onClick?: () => void;
-  className?: string;
-}) {
+}: ProductCardProps) {
   let cardLabel;
 
   const cardData = product?.variants ? product : getProductPlaceholder();
@@ -51,12 +45,12 @@ export function ProductCard({
     cardLabel = 'New';
   }
 
-  const styles = clsx('grid gap-6', className);
+  const styles = clsx('grid gap-3', className);
 
   return (
     <Link onClick={onClick} to={`/products/${product.handle}`}>
       <div className={styles}>
-        <div className="card-image aspect-[4/5] bg-primary/5">
+        <div className="card-image aspect-[4/5] bg-primary/5 hover:opacity-75">
           <Badge size="lg" className="absolute top-0 right-0 z-10 mr-2 mt-2">
             <Text as="label" size="fine" className="text-notice text-right">
               {cardLabel}
@@ -64,9 +58,9 @@ export function ProductCard({
           </Badge>
           {image && (
             <Image
-              className="fade-in aspect-[4/5] w-full object-cover"
               widths={[320]}
               sizes="320px"
+              className="fade-in aspect-[4/5] w-full object-cover"
               loaderOptions={{
                 crop: 'center',
                 scale: 2,
@@ -82,8 +76,8 @@ export function ProductCard({
         </div>
         <div className="grid gap-1">
           <Text
-            className="w-full overflow-hidden text-ellipsis whitespace-nowrap "
             as="h3"
+            className="w-full overflow-hidden text-ellipsis whitespace-nowrap "
           >
             {product.title}
           </Text>
@@ -104,13 +98,7 @@ export function ProductCard({
   );
 }
 
-function CompareAtPrice({
-  data,
-  className,
-}: {
-  data: MoneyV2;
-  className?: string;
-}) {
+function CompareAtPrice({data, className}: CompareAtPriceProps) {
   const {currencyNarrowSymbol, withoutTrailingZerosAndCurrency} =
     useMoney(data);
 
@@ -123,3 +111,16 @@ function CompareAtPrice({
     </span>
   );
 }
+
+type ProductCardProps = {
+  label?: string;
+  loading?: HTMLImageElement['loading'];
+  product: Product;
+  onClick?: () => void;
+  className?: string;
+};
+
+type CompareAtPriceProps = {
+  data: MoneyV2;
+  className?: string;
+};

@@ -3,8 +3,8 @@ import {XIcon} from '@heroicons/react/outline';
 // @ts-expect-error @headlessui/react incompatibility with node16 resolution
 import {Dialog, Transition} from '@headlessui/react';
 
-import {Heading} from '~/components';
-import {useSettings} from '~/contexts/SettingsContext.client';
+import {Button, Heading} from '~/components';
+import clsx from 'clsx';
 
 /**
  * Drawer component that opens on user click.
@@ -13,16 +13,19 @@ import {useSettings} from '~/contexts/SettingsContext.client';
  * @param onClose - function should set the open state.
  * @param openFrom - right, left
  * @param children - react children node.
+ * @param compact
  */
 function Drawer({
   open,
   heading,
   onClose,
   children,
+  width = 'md',
   openFrom = 'right',
 }: {
   open: boolean;
   heading?: string;
+  width?: 'min' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
   onClose: () => void;
   children: React.ReactNode;
   openFrom: 'right' | 'left';
@@ -31,7 +34,13 @@ function Drawer({
     right: 'translate-x-full',
     left: '-translate-x-full',
   };
-  const {themeMode, onToggleMode} = useSettings();
+
+  const styles = {
+    panel: clsx(
+      width ? `max-w-${width}` : '',
+      'w-screen pointer-events-auto bg-base-100 md:m-3 md:rounded-xl',
+    ),
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -64,7 +73,7 @@ function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md bg-base-100">
+                <Dialog.Panel className={styles.panel}>
                   <div className="flex h-full flex-col overflow-y-scroll py-6 shadow-xl">
                     <header className="px-4 sm:px-6">
                       <div className="flex items-start justify-between">
@@ -75,15 +84,16 @@ function Drawer({
                             </Heading>
                           </Dialog.Title>
                         )}
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="text-primary transition hover:text-primary/50"
+                        <div className="ml-3 flex h-7 items-center gap-3">
+                          <Button
+                            size="sm"
+                            shape="circle"
+                            variant="outline"
                             onClick={onClose}
                           >
                             <span className="sr-only">Close panel</span>
-                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
+                            <XIcon className="h-4 w-4" aria-hidden="true" />
+                          </Button>
                         </div>
                       </div>
                     </header>
@@ -99,7 +109,7 @@ function Drawer({
   );
 }
 
-/* Use for associating arialabelledby with the title*/
+/* Use for associating aria-labelledby with the title*/
 Drawer.Title = Dialog.Title;
 
 export {Drawer};

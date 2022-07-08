@@ -1,14 +1,12 @@
-import {useEffect, useCallback, useState} from 'react';
-
 import {
-  useProductOptions,
-  isBrowser,
-  useUrl,
-  AddToCartButton,
   Money,
+  useUrl,
+  isBrowser,
+  AddToCartButton,
   OptionWithValues,
+  useProductOptions,
 } from '@shopify/hydrogen';
-
+import {useEffect, useCallback, useState} from 'react';
 import {Heading, Text, Button, ProductOptions} from '~/components';
 
 export function ProductForm() {
@@ -71,70 +69,66 @@ export function ProductForm() {
     [setSelectedOption, params, pathname],
   );
 
+  function productHasOptionWithMultipleValues(
+    options: OptionWithValues[] | null,
+  ) {
+    return (options || []).some((option) => {
+      return option.values.length > 1;
+    });
+  }
+
   return (
     <form className="grid gap-10">
-      {
+      {productHasOptionWithMultipleValues(options as OptionWithValues[]) && (
         <div className="grid gap-4">
-          {(options as OptionWithValues[]).map(({name, values}) => {
-            if (values.length === 1) {
-              return null;
-            }
-            return (
-              <div
-                key={name}
-                className="mb-4 flex flex-col flex-wrap gap-y-2 last:mb-0"
-              >
-                <Heading as="legend" size="lead" className="min-w-[4rem]">
-                  {name}
-                </Heading>
-                <div className="flex flex-wrap items-baseline gap-4">
-                  <ProductOptions
-                    name={name}
-                    handleChange={handleChange}
-                    values={values}
-                  />
-                </div>
+          {(options as OptionWithValues[]).map(({name, values}) => (
+            <div
+              key={name}
+              className="mb-4 flex flex-col flex-wrap gap-y-2 last:mb-0"
+            >
+              <Heading as="legend" size="lead" className="min-w-[4rem]">
+                {name}
+              </Heading>
+              <div className="flex flex-wrap items-baseline gap-4">
+                <ProductOptions
+                  name={name}
+                  values={values}
+                  handleChange={handleChange}
+                />
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
-      }
+      )}
       <div className="grid items-stretch gap-4">
         <AddToCartButton
           quantity={1}
+          className="btn btn-primary"
           disabled={isOutOfStock}
           variantId={selectedVariant?.id}
           accessibleAddingToCartLabel="Adding item to your cart"
         >
-          <Button
-            as="span"
-            width="full"
-            variant={isOutOfStock ? 'secondary' : 'primary'}
-          >
-            {isOutOfStock ? (
-              <Text>Sold out</Text>
-            ) : (
-              <Text
+          {isOutOfStock ? (
+            <Text>Sold out</Text>
+          ) : (
+            <Text as="span" className="flex items-center justify-center gap-2">
+              <span>Add to bag</span>
+              <span>&middot;</span>
+              <Money
                 as="span"
-                className="flex items-center justify-center gap-2"
-              >
-                <span>Add to bag</span> <span>·</span>{' '}
+                withoutTrailingZeros
+                data={selectedVariant.priceV2!}
+              />
+              {isOnSale && (
                 <Money
                   as="span"
                   withoutTrailingZeros
-                  data={selectedVariant.priceV2!}
+                  className="strike opacity-50"
+                  data={selectedVariant.compareAtPriceV2!}
                 />
-                {isOnSale && (
-                  <Money
-                    as="span"
-                    withoutTrailingZeros
-                    className="strike opacity-50"
-                    data={selectedVariant.compareAtPriceV2!}
-                  />
-                )}
-              </Text>
-            )}
-          </Button>
+              )}
+            </Text>
+          )}
         </AddToCartButton>
       </div>
     </form>

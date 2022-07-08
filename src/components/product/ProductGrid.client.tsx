@@ -1,25 +1,20 @@
-import {useState, useRef, useEffect, useCallback} from 'react';
 import {Link, flattenConnection} from '@shopify/hydrogen';
-
-import {Button, Grid, ProductCard} from '~/components';
-import {getImageLoadingPriority} from '~/lib/const';
+import {useState, useRef, useEffect, useCallback} from 'react';
 import type {Collection, Product} from '@shopify/hydrogen/storefront-api-types';
 
-export function ProductGrid({
-  url,
-  collection,
-}: {
-  url: string;
-  collection: Collection;
-}) {
-  const nextButtonRef = useRef(null);
+import {getImageLoadingPriority} from '~/lib/const';
+import {Button, Grid, ProductCard} from '~/components';
+
+export function ProductGrid({url, collection}: ProductGridProps) {
   const initialProducts = collection?.products?.nodes || [];
-  const {hasNextPage, endCursor} = collection?.products?.pageInfo ?? {};
-  const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [cursor, setCursor] = useState(endCursor ?? '');
-  const [nextPage, setNextPage] = useState(hasNextPage);
-  const [pending, setPending] = useState(false);
   const haveProducts = initialProducts.length > 0;
+  const {hasNextPage, endCursor} = collection?.products?.pageInfo ?? {};
+
+  const nextButtonRef = useRef(null);
+  const [cursor, setCursor] = useState(endCursor ?? '');
+  const [pending, setPending] = useState(false);
+  const [nextPage, setNextPage] = useState(hasNextPage);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
 
   const fetchProducts = useCallback(async () => {
     setPending(true);
@@ -47,9 +42,9 @@ export function ProductGrid({
 
   const handleIntersect = useCallback(
     (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
+      entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
-          fetchProducts();
+          await fetchProducts();
         }
       });
     },
@@ -60,11 +55,8 @@ export function ProductGrid({
     const observer = new IntersectionObserver(handleIntersect, {
       rootMargin: '100%',
     });
-
     const nextButton = nextButtonRef.current;
-
     if (nextButton) observer.observe(nextButton);
-
     return () => {
       if (nextButton) observer.unobserve(nextButton);
     };
@@ -73,7 +65,7 @@ export function ProductGrid({
   if (!haveProducts) {
     return (
       <>
-        <p>No products found on this collection</p>
+        <p>No products found on this collection.</p>
         <Link to="/products">
           <p className="underline">Browse catalog</p>
         </Link>
@@ -95,14 +87,15 @@ export function ProductGrid({
 
       {nextPage && (
         <div
-          className="mt-6 flex items-center justify-center"
           ref={nextButtonRef}
+          className="mt-6 flex items-center justify-center"
         >
           <Button
-            variant="secondary"
+            width="auto"
+            color="primary"
+            loading={pending}
             disabled={pending}
             onClick={fetchProducts}
-            width="full"
           >
             {pending ? 'Loading...' : 'Load more products'}
           </Button>
@@ -111,3 +104,8 @@ export function ProductGrid({
     </>
   );
 }
+
+type ProductGridProps = {
+  url: string;
+  collection: Collection;
+};

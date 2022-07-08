@@ -17,7 +17,7 @@ export function CountrySelector() {
     country: {isoCode},
   } = useLocalization();
   const [listBoxOpen, setListBoxOpen] = useState(false);
-  const currentCountry = useMemo<{name: string; isoCode: CountryCode}>(() => {
+  const currentCountry = useMemo<CurrentCountry>(() => {
     const regionNamesInEnglish = new Intl.DisplayNames(['en'], {
       type: 'region',
     });
@@ -28,7 +28,7 @@ export function CountrySelector() {
     };
   }, [isoCode]);
 
-  const setCountry = useCallback<(country: Country) => void>(
+  const setCountry = useCallback<SetCountryParams>(
     ({isoCode: newIsoCode}) => {
       const currentPath = window.location.pathname;
       let redirectPath;
@@ -53,8 +53,7 @@ export function CountrySelector() {
   return (
     <div className="relative">
       <Listbox onChange={setCountry}>
-        {/* @ts-expect-error @headlessui/react incompatibility with node16 resolution */}
-        {({open}) => {
+        {({open}: {open: boolean}) => {
           setTimeout(() => setListBoxOpen(open));
           return (
             <>
@@ -68,10 +67,10 @@ export function CountrySelector() {
               </Listbox.Button>
 
               <Listbox.Options
-                className={`absolute bottom-12 z-10 grid h-48 w-full overflow-y-scroll rounded-t
-                border border-contrast/30 border-t-contrast/30 bg-primary px-2 py-2 transition-[max-height] duration-150
-                dark:border-white dark:bg-contrast sm:bottom-auto md:rounded-b md:rounded-t-none
-                md:border-t-0 md:border-b ${
+                className={`absolute bottom-12 z-10 grid h-48
+                w-full overflow-y-scroll rounded-t border bg-base-300 px-2 py-2
+                transition-[max-height] duration-150 sm:bottom-auto md:rounded-b
+                md:rounded-t-none md:border-t-0 md:border-b ${
                   listBoxOpen ? 'max-h-48' : 'max-h-0'
                 }`}
               >
@@ -81,8 +80,7 @@ export function CountrySelector() {
                     <Countries
                       selectedCountry={currentCountry}
                       getClassName={(active) => {
-                        return `text-contrast dark:text-primary bg-primary 
-                        dark:bg-contrast w-full p-2 transition rounded 
+                        return `w-full p-2 transition rounded 
                         flex justify-start items-center text-left cursor-pointer ${
                           active ? 'bg-primary/10' : null
                         }`;
@@ -99,13 +97,7 @@ export function CountrySelector() {
   );
 }
 
-export function Countries({
-  getClassName,
-  selectedCountry,
-}: {
-  getClassName: (active: boolean) => string;
-  selectedCountry: Pick<Country, 'isoCode' | 'name'>;
-}) {
+export function Countries({getClassName, selectedCountry}: CountriesProps) {
   const countries: Country[] = fetchSync('/api/countries').json();
 
   return (countries || []).map((country) => {
@@ -115,11 +107,7 @@ export function Countries({
       <Listbox.Option key={country.isoCode} value={country}>
         {/* @ts-expect-error @headlessui/react incompatibility with node16 resolution */}
         {({active}) => (
-          <div
-            className={`text-contrast dark:text-primary ${getClassName(
-              active,
-            )}`}
-          >
+          <div className={getClassName(active)}>
             {country.name}
             {isSelected ? (
               <span className="ml-2">
@@ -132,3 +120,10 @@ export function Countries({
     );
   });
 }
+
+type CurrentCountry = {name: string; isoCode: CountryCode};
+type SetCountryParams = (country: Country) => void;
+type CountriesProps = {
+  getClassName: (active: boolean) => string;
+  selectedCountry: Pick<Country, 'isoCode' | 'name'>;
+};

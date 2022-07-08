@@ -1,9 +1,10 @@
-import {useLocalization, useShopQuery, CacheLong, gql} from '@shopify/hydrogen';
+import type React from 'react';
 import type {Menu, Shop} from '@shopify/hydrogen/storefront-api-types';
+import {useLocalization, useShopQuery, CacheLong, gql} from '@shopify/hydrogen';
 
-import {Header} from '~/components';
-import {Footer} from '~/components/index.server';
 import {parseMenu} from '~/lib/utils';
+import {Footer} from '~/components/index.server';
+import {Header, SettingsFloatingButton} from '~/components';
 
 const HEADER_MENU_HANDLE = 'main-menu';
 const FOOTER_MENU_HANDLE = 'footer';
@@ -22,13 +23,13 @@ export function Layout({children}: {children: React.ReactNode}) {
     footerMenu: Menu;
   }>({
     query: SHOP_QUERY,
+    cache: CacheLong(),
+    preload: '*',
     variables: {
       language: languageCode,
       headerMenuHandle: HEADER_MENU_HANDLE,
       footerMenuHandle: FOOTER_MENU_HANDLE,
     },
-    cache: CacheLong(),
-    preload: '*',
   });
 
   const shopName = data ? data.shop.name : 'Hydrogen Demo Store';
@@ -54,17 +55,20 @@ export function Layout({children}: {children: React.ReactNode}) {
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <div className="">
-          <a href="#mainContent" className="sr-only">
-            Skip to content
-          </a>
-        </div>
+        <a href="#main-content" className="sr-only">
+          Skip to content
+        </a>
+
         <Header title={shopName} menu={headerMenu} />
-        <main role="main" id="mainContent" className="flex-grow">
+
+        <main role="main" id="main-content" className="flex-grow">
           {children}
         </main>
       </div>
+
       <Footer menu={footerMenu} />
+
+      <SettingsFloatingButton className="block lg:hidden" />
     </>
   );
 }

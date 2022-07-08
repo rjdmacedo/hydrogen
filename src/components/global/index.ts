@@ -3,3 +3,4 @@ export {FooterMenu} from './FooterMenu.client';
 export {Header} from './Header.client';
 export {Modal} from './Modal.client';
 export {PageHeader} from './PageHeader';
+export {SettingsFloatingButton} from './SettingsFloatingButton.client';

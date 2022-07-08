@@ -126,9 +126,9 @@ export function IconCaret({
   return (
     <Icon
       {...props}
-      className={`h-5 w-5 transition ${rotate}`}
       fill="transparent"
       stroke={stroke}
+      className={`h-5 w-5 transition duration-150 ${rotate}`}
     >
       <title>Caret</title>
       <path d="M14 8L10 12L6 8" strokeWidth="1.25" />

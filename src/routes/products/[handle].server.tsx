@@ -67,7 +67,7 @@ export default function Product() {
               media={media.nodes}
               className="w-screen md:w-full lg:col-span-2"
             />
-            <div className="hiddenScroll sticky md:top-nav md:-mb-nav md:h-screen md:-translate-y-nav md:overflow-y-scroll md:pt-nav">
+            <div className="hidden-scroll sticky md:top-nav md:-mb-nav md:h-screen md:-translate-y-nav md:overflow-y-scroll md:pt-nav">
               <section className="flex w-full max-w-xl flex-col gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
                 <div className="grid gap-2">
                   <Heading as="h1" format className="whitespace-normal">

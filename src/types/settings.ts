@@ -7,7 +7,9 @@ export type SettingsContextProps = {
 
   // Mode
   onToggleMode: VoidFunction;
-  onChangeMode: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeMode: (
+    event: React.ChangeEvent<HTMLInputElement> | 'light' | 'dark',
+  ) => void;
 
   // Reset
   onResetSetting: VoidFunction;

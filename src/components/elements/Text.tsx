@@ -1,27 +1,17 @@
 import clsx from 'clsx';
-
-import {missingClass, formatText} from '~/lib/utils';
 import React from 'react';
+import {missingClass, formatText} from '~/lib/utils';
 
 export function Text({
   as: Component = 'span',
-  className,
-  color = 'default',
-  format,
   size = 'copy',
+  color = 'default',
   width = 'default',
+  format,
   children,
+  className,
   ...props
-}: {
-  as?: React.ElementType;
-  className?: string;
-  color?: 'default' | 'primary' | 'subtle' | 'notice' | 'contrast';
-  format?: boolean;
-  size?: 'lead' | 'copy' | 'fine';
-  width?: 'default' | 'narrow' | 'wide';
-  children: React.ReactNode;
-  [key: string]: any;
-}) {
+}: TextProps) {
   const colors: Record<string, string> = {
     default: 'inherit',
     primary: 'text-primary/90',
@@ -56,3 +46,14 @@ export function Text({
     </Component>
   );
 }
+
+type TextProps = {
+  as?: React.ElementType;
+  size?: 'lead' | 'copy' | 'fine';
+  color?: 'default' | 'primary' | 'subtle' | 'notice' | 'contrast';
+  width?: 'default' | 'narrow' | 'wide';
+  format?: boolean;
+  children: React.ReactNode;
+  className?: string;
+  [key: string]: any;
+};

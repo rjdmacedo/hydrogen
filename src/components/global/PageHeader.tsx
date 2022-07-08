@@ -1,18 +1,19 @@
 import clsx from 'clsx';
 
 import {Heading} from '~/components';
+import React from 'react';
 
 export function PageHeader({
-  children,
-  className,
   heading,
   variant = 'default',
+  children,
+  className,
   ...props
 }: {
-  children?: React.ReactNode;
-  className?: string;
   heading?: string;
   variant?: 'default' | 'blogPost' | 'allCollections';
+  children?: React.ReactNode;
+  className?: string;
   [key: string]: any;
 }) {
   const variants: Record<string, string> = {

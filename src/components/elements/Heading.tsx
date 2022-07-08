@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 import {missingClass, formatText} from '~/lib/utils';
+import React from 'react';
 
 export function Heading({
   as: Component = 'h2',

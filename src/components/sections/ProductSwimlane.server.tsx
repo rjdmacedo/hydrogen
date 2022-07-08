@@ -38,7 +38,7 @@ export function ProductSwimlane({
 
   return (
     <Section heading={title} padding="y" {...props}>
-      <div className="swimlane hiddenScroll md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
+      <div className="swimlane hidden-scroll md:scroll-px-8 md:px-8 md:pb-8 lg:scroll-px-12 lg:px-12">
         {productCardsMarkup}
       </div>
     </Section>

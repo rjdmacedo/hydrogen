@@ -37,10 +37,15 @@ export default function SettingsProvider({
     });
   };
 
-  const onChangeMode = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeMode = (
+    event: React.ChangeEvent<HTMLInputElement> | 'light' | 'dark',
+  ) => {
     setSettings({
       ...settings,
-      themeMode: (event.target as HTMLInputElement).value as ThemeMode,
+      themeMode:
+        typeof event === 'string'
+          ? event
+          : ((event.target as HTMLInputElement).value as ThemeMode),
     });
   };
 

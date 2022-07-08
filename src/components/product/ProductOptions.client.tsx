@@ -1,17 +1,11 @@
-import {useCallback, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 // @ts-expect-error @headlessui/react incompatibility with node16 resolution
 import {Listbox} from '@headlessui/react';
 import {useProductOptions} from '@shopify/hydrogen';
 
 import {Text, IconCheck, IconCaret} from '~/components';
 
-export function ProductOptions({
-  values,
-  ...props
-}: {
-  values: any[];
-  [key: string]: any;
-} & React.ComponentProps<typeof OptionsGrid>) {
+export function ProductOptions({values, ...props}: ProductOptionsProps) {
   const asDropdown = values.length > 7;
 
   return asDropdown ? (
@@ -21,32 +15,24 @@ export function ProductOptions({
   );
 }
 
-function OptionsGrid({
-  values,
-  name,
-  handleChange,
-}: {
-  values: string[];
-  name: string;
-  handleChange: (name: string, value: string) => void;
-}) {
+function OptionsGrid({name, values, handleChange}: ProductOptionsGridProps) {
   const {selectedOptions} = useProductOptions();
 
   return (
     <>
       {values.map((value) => {
-        const checked = selectedOptions![name] === value;
         const id = `option-${name}-${value}`;
+        const checked = selectedOptions![name] === value;
 
         return (
           <Text as="label" key={id} htmlFor={id}>
             <input
-              className="sr-only"
-              type="radio"
               id={id}
+              type="radio"
               name={`option[${name}]`}
               value={value}
               checked={checked}
+              className="sr-only"
               onChange={() => handleChange(name, value)}
             />
             <div
@@ -65,16 +51,12 @@ function OptionsGrid({
 
 // TODO: De-dupe UI with CountrySelector
 function OptionsDropdown({
-  values,
   name,
+  values,
   handleChange,
-}: {
-  values: string[];
-  name: string;
-  handleChange: (name: string, value: string) => void;
-}) {
-  const [listboxOpen, setListboxOpen] = useState(false);
+}: ProductOptionsDropdownProps) {
   const {selectedOptions} = useProductOptions();
+  const [listBoxOpen, setListBoxOpen] = useState(false);
 
   const updateSelectedOption = useCallback(
     (value: string) => {
@@ -88,7 +70,7 @@ function OptionsDropdown({
       <Listbox onChange={updateSelectedOption} value="">
         {/* @ts-expect-error @headlessui/react incompatibility with node16 resolution */}
         {({open}) => {
-          setTimeout(() => setListboxOpen(open));
+          setTimeout(() => setListBoxOpen(open));
           return (
             <>
               <Listbox.Button
@@ -101,10 +83,10 @@ function OptionsDropdown({
               </Listbox.Button>
 
               <Listbox.Options
-                className={`absolute bottom-12 z-30 grid h-48 w-full
-                overflow-y-scroll rounded-t border border-primary bg-contrast px-2 py-2 transition-[max-height]
+                className={`bg-contrast absolute bottom-12 z-30 grid h-48
+                w-full overflow-y-scroll rounded-t border border-primary px-2 py-2 transition-[max-height]
                 duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b ${
-                  listboxOpen ? 'max-h-48' : 'max-h-0'
+                  listBoxOpen ? 'max-h-48' : 'max-h-0'
                 }`}
               >
                 {values.map((value) => {
@@ -139,3 +121,20 @@ function OptionsDropdown({
     </div>
   );
 }
+
+type ProductOptionsProps = {
+  values: any[];
+  [key: string]: any;
+} & React.ComponentProps<typeof OptionsGrid>;
+
+type ProductOptionsGridProps = {
+  values: string[];
+  name: string;
+  handleChange: (name: string, value: string) => void;
+};
+
+type ProductOptionsDropdownProps = {
+  name: string;
+  values: string[];
+  handleChange: (name: string, value: string) => void;
+};

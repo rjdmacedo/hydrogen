@@ -1,24 +1,17 @@
 import clsx from 'clsx';
+import React from 'react';
 
 export function Grid({
   as: Component = 'div',
-  className,
-  flow = 'row',
   gap = 'default',
+  flow = 'row',
   items = 4,
   layout = 'default',
+  className,
   ...props
-}: {
-  as?: React.ElementType;
-  className?: string;
-  flow?: 'row' | 'col';
-  gap?: 'default' | 'blog';
-  items?: number;
-  layout?: 'default' | 'products' | 'auto' | 'blog';
-  [key: string]: any;
-}) {
+}: GridProps) {
   const layouts = {
-    default: `grid-cols-1 ${items === 2 && 'md:grid-cols-2'}  ${
+    default: `grid-cols-1 ${items === 2 && 'md:grid-cols-2'} ${
       items === 3 && 'sm:grid-cols-3'
     } ${items > 3 && 'md:grid-cols-3'} ${items >= 4 && 'lg:grid-cols-4'}`,
     products: `grid-cols-2 ${items >= 3 && 'md:grid-cols-3'} ${
@@ -42,3 +35,13 @@ export function Grid({
 
   return <Component {...props} className={styles} />;
 }
+
+type GridProps = {
+  as?: React.ElementType;
+  gap?: 'default' | 'blog';
+  flow?: 'row' | 'col';
+  items?: number;
+  layout?: 'default' | 'products' | 'auto' | 'blog';
+  className?: string;
+  [key: string]: any;
+};
