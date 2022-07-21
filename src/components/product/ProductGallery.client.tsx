@@ -67,7 +67,7 @@ export function ProductGallery({media, className}: ProductGalleryProps) {
         const style = [
           isFullWidth ? 'md:col-span-2' : 'md:col-span-1',
           isFirst || isFourth ? '' : 'md:aspect-[4/5]',
-          'aspect-[3/4] snap-center card-image w-mobile-gallery md:w-full',
+          'snap-center card-image w-mobile-gallery md:w-full',
         ].join(' ');
 
         return (
