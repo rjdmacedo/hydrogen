@@ -36,8 +36,8 @@ function OptionsGrid({name, values, handleChange}: ProductOptionsGridProps) {
               onChange={() => handleChange(name, value)}
             />
             <div
-              className={`cursor-pointer border-b-[1.5px] py-1 leading-none transition-all duration-200 ${
-                checked ? 'border-primary/50' : 'border-primary/0'
+              className={`badge cursor-pointer leading-none transition-all duration-200 ${
+                checked && 'badge-primary'
               }`}
             >
               {value}
